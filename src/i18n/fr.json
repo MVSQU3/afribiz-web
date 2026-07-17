@@ -1,0 +1,188 @@
+{
+  "app": {
+    "name": "AfriBiz",
+    "tagline": "Trouvez le business à reprendre en Afrique"
+  },
+  "nav": {
+    "home": "Accueil",
+    "search": "Explorer",
+    "messages": "Messages",
+    "dashboard": "Tableau de bord",
+    "login": "Connexion",
+    "register": "Inscription",
+    "logout": "Déconnexion"
+  },
+  "home": {
+    "title": "Trouvez votre prochain business",
+    "subtitle": "Des centaines d'opportunités vérifiées en Afrique de l'Ouest",
+    "searchPlaceholder": "Ville, secteur ou mot-clé...",
+    "featured": "Mis en avant",
+    "noListings": "Aucune annonce pour le moment",
+    "sellTitle": "Vous vendez votre business ?",
+    "sellSubtitle": "Publiez votre annonce gratuitement en quelques minutes",
+    "sellCta": "Mettre en vente"
+  },
+  "search": {
+    "results": "{{count}} business trouvés",
+    "filters": "Filtres",
+    "country": "Pays",
+    "sector": "Secteur",
+    "priceRange": "Fourchette de prix",
+    "businessType": "Type de business",
+    "apply": "Appliquer",
+    "reset": "Réinitialiser",
+    "all": "Tous",
+    "minPrice": "Prix min",
+    "maxPrice": "Prix max",
+    "noResults": "Aucun résultat avec ces filtres"
+  },
+  "listing": {
+    "askingPrice": "Prix demandé",
+    "revenue": "CA annuel",
+    "profit": "Bénéfice net",
+    "employees": "Employés",
+    "founded": "Créé en",
+    "contactSeller": "Contacter le vendeur",
+    "verified": "Vérifié",
+    "featured": "Mis en avant",
+    "financials": "Chiffres clés",
+    "about": "À propos",
+    "reasonForSale": "Raison de la vente",
+    "soldBy": "Vendu par",
+    "notFound": "Annonce introuvable",
+    "employeesShort": "employés"
+  },
+  "auth": {
+    "login": "Connexion",
+    "register": "Créer un compte",
+    "email": "Email",
+    "phone": "Téléphone",
+    "password": "Mot de passe",
+    "otpSent": "Code envoyé par SMS",
+    "otpVerify": "Vérifier le code",
+    "identifier": "Email ou téléphone",
+    "firstName": "Prénom",
+    "lastName": "Nom",
+    "country": "Pays",
+    "invalidCredentials": "Identifiants incorrects",
+    "emailTaken": "Un compte existe déjà avec cet email",
+    "phoneTaken": "Un compte existe déjà avec ce numéro",
+    "invalidPhone": "Numéro invalide (format international requis, ex : +2250701020304)",
+    "noAccount": "Pas encore de compte ?",
+    "hasAccount": "Déjà un compte ?"
+  },
+  "common": {
+    "loading": "Chargement...",
+    "error": "Une erreur est survenue",
+    "retry": "Réessayer",
+    "seeAll": "Voir tout",
+    "back": "Retour"
+  },
+  "countries": {
+    "CI": "Côte d'Ivoire",
+    "SN": "Sénégal",
+    "BJ": "Bénin",
+    "TG": "Togo",
+    "NG": "Nigeria",
+    "GH": "Ghana"
+  },
+  "profile": {
+    "title": "Mon profil",
+    "language": "Langue",
+    "save": "Enregistrer",
+    "saved": "Profil mis à jour"
+  },
+  "images": {
+    "addImages": "+ Ajouter des photos",
+    "uploading": "Envoi en cours...",
+    "uploadError": "Échec de l'envoi, réessayez",
+    "setPrimary": "Image principale"
+  },
+  "sectors": {
+    "commerce": "Commerce",
+    "tech": "Tech",
+    "agriculture": "Agriculture",
+    "restauration": "Restauration",
+    "services": "Services",
+    "industrie": "Industrie"
+  },
+  "businessTypes": {
+    "digital": "Digital",
+    "physical": "Physique",
+    "hybrid": "Hybride"
+  },
+  "sell": {
+    "title": "Mettre en vente mon business",
+    "step1": "Informations de base",
+    "step2": "Chiffres financiers",
+    "step3": "Photos",
+    "businessTitle": "Titre de l'annonce",
+    "description": "Description",
+    "city": "Ville",
+    "foundedYear": "Année de création",
+    "annualRevenue": "Chiffre d'affaires annuel",
+    "netProfit": "Bénéfice net annuel",
+    "askingPrice": "Prix demandé",
+    "reasonForSale": "Raison de la vente",
+    "saveAndContinue": "Enregistrer et continuer",
+    "submit": "Soumettre pour validation",
+    "moderationNote": "Votre annonce sera vérifiée par notre équipe avant publication."
+  },
+  "admin": {
+    "title": "Administration",
+    "moderation": "Modération",
+    "reports": "Signalements",
+    "users": "Utilisateurs",
+    "emptyQueue": "Aucune annonce en attente",
+    "by": "Par",
+    "photos": "photos",
+    "approve": "Approuver",
+    "reject": "Rejeter",
+    "rejectReason": "Motif du rejet (visible par le vendeur)",
+    "confirmReject": "Confirmer le rejet",
+    "cancel": "Annuler",
+    "noReports": "Aucun signalement ouvert",
+    "reportedBy": "Signalé par",
+    "resolve": "Résolu",
+    "dismiss": "Ignorer",
+    "searchUsers": "Rechercher par nom, email, téléphone...",
+    "suspended": "Suspendu",
+    "suspend": "Suspendre",
+    "unsuspend": "Réactiver",
+    "seed": "Seed"
+  },
+  "messages": {
+    "empty": "Aucune conversation pour le moment. Contactez un vendeur depuis une annonce.",
+    "about": "À propos de",
+    "startConversation": "Envoyez votre premier message au vendeur",
+    "placeholder": "Votre message...",
+    "send": "Envoyer"
+  },
+  "dashboard": {
+    "title": "Tableau de bord",
+    "empty": "Vous n'avez pas encore d'annonce.",
+    "submittedNotice": "Annonce soumise ! Elle sera vérifiée par notre équipe avant publication.",
+    "views": "vues",
+    "messages": "messages",
+    "rejectedReason": "Motif du rejet",
+    "edit": "Modifier",
+    "view": "Voir l'annonce",
+    "archive": "Archiver",
+    "buyerSection": "Vos conversations avec les vendeurs"
+  },
+  "status": {
+    "draft": "Brouillon",
+    "pending": "En attente de validation",
+    "published": "Publiée",
+    "sold": "Vendue",
+    "archived": "Archivée"
+  },
+  "seed": {
+    "sellerSection": "Vendeur",
+    "businessSection": "Annonce",
+    "optional": "optionnel",
+    "create": "Créer et publier",
+    "created": "Annonce créée et publiée !",
+    "addPhotos": "Ajouter des photos"
+  }
+}

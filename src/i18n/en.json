@@ -1,0 +1,188 @@
+{
+  "app": {
+    "name": "AfriBiz",
+    "tagline": "Find your next business in Africa"
+  },
+  "nav": {
+    "home": "Home",
+    "search": "Explore",
+    "messages": "Messages",
+    "dashboard": "Dashboard",
+    "login": "Log in",
+    "register": "Sign up",
+    "logout": "Log out"
+  },
+  "home": {
+    "title": "Find your next business",
+    "subtitle": "Hundreds of verified opportunities across West Africa",
+    "searchPlaceholder": "City, sector or keyword...",
+    "featured": "Featured",
+    "noListings": "No listings yet",
+    "sellTitle": "Selling your business?",
+    "sellSubtitle": "Post your listing for free in minutes",
+    "sellCta": "Sell my business"
+  },
+  "search": {
+    "results": "{{count}} businesses found",
+    "filters": "Filters",
+    "country": "Country",
+    "sector": "Sector",
+    "priceRange": "Price range",
+    "businessType": "Business type",
+    "apply": "Apply",
+    "reset": "Reset",
+    "all": "All",
+    "minPrice": "Min price",
+    "maxPrice": "Max price",
+    "noResults": "No results with these filters"
+  },
+  "listing": {
+    "askingPrice": "Asking price",
+    "revenue": "Annual revenue",
+    "profit": "Net profit",
+    "employees": "Employees",
+    "founded": "Founded",
+    "contactSeller": "Contact seller",
+    "verified": "Verified",
+    "featured": "Featured",
+    "financials": "Key figures",
+    "about": "About",
+    "reasonForSale": "Reason for sale",
+    "soldBy": "Sold by",
+    "notFound": "Listing not found",
+    "employeesShort": "employees"
+  },
+  "auth": {
+    "login": "Log in",
+    "register": "Create account",
+    "email": "Email",
+    "phone": "Phone",
+    "password": "Password",
+    "otpSent": "Code sent by SMS",
+    "otpVerify": "Verify code",
+    "identifier": "Email or phone",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "country": "Country",
+    "invalidCredentials": "Invalid credentials",
+    "emailTaken": "An account with this email already exists",
+    "phoneTaken": "An account with this phone number already exists",
+    "invalidPhone": "Invalid phone number (international format required, e.g. +2250701020304)",
+    "noAccount": "No account yet?",
+    "hasAccount": "Already have an account?"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "retry": "Retry",
+    "seeAll": "See all",
+    "back": "Back"
+  },
+  "countries": {
+    "CI": "Ivory Coast",
+    "SN": "Senegal",
+    "BJ": "Benin",
+    "TG": "Togo",
+    "NG": "Nigeria",
+    "GH": "Ghana"
+  },
+  "profile": {
+    "title": "My profile",
+    "language": "Language",
+    "save": "Save",
+    "saved": "Profile updated"
+  },
+  "images": {
+    "addImages": "+ Add photos",
+    "uploading": "Uploading...",
+    "uploadError": "Upload failed, try again",
+    "setPrimary": "Primary image"
+  },
+  "sectors": {
+    "commerce": "Retail",
+    "tech": "Tech",
+    "agriculture": "Agriculture",
+    "restauration": "Food & Beverage",
+    "services": "Services",
+    "industrie": "Industry"
+  },
+  "businessTypes": {
+    "digital": "Digital",
+    "physical": "Physical",
+    "hybrid": "Hybrid"
+  },
+  "sell": {
+    "title": "Sell my business",
+    "step1": "Basic information",
+    "step2": "Financials",
+    "step3": "Photos",
+    "businessTitle": "Listing title",
+    "description": "Description",
+    "city": "City",
+    "foundedYear": "Founded year",
+    "annualRevenue": "Annual revenue",
+    "netProfit": "Annual net profit",
+    "askingPrice": "Asking price",
+    "reasonForSale": "Reason for sale",
+    "saveAndContinue": "Save and continue",
+    "submit": "Submit for review",
+    "moderationNote": "Your listing will be reviewed by our team before going live."
+  },
+  "admin": {
+    "title": "Administration",
+    "moderation": "Moderation",
+    "reports": "Reports",
+    "users": "Users",
+    "emptyQueue": "No pending listings",
+    "by": "By",
+    "photos": "photos",
+    "approve": "Approve",
+    "reject": "Reject",
+    "rejectReason": "Rejection reason (visible to seller)",
+    "confirmReject": "Confirm rejection",
+    "cancel": "Cancel",
+    "noReports": "No open reports",
+    "reportedBy": "Reported by",
+    "resolve": "Resolved",
+    "dismiss": "Dismiss",
+    "searchUsers": "Search by name, email, phone...",
+    "suspended": "Suspended",
+    "suspend": "Suspend",
+    "unsuspend": "Reactivate",
+    "seed": "Seed"
+  },
+  "messages": {
+    "empty": "No conversations yet. Contact a seller from a listing.",
+    "about": "About",
+    "startConversation": "Send your first message to the seller",
+    "placeholder": "Your message...",
+    "send": "Send"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "empty": "You have no listings yet.",
+    "submittedNotice": "Listing submitted! Our team will review it before publication.",
+    "views": "views",
+    "messages": "messages",
+    "rejectedReason": "Rejection reason",
+    "edit": "Edit",
+    "view": "View listing",
+    "archive": "Archive",
+    "buyerSection": "Your conversations with sellers"
+  },
+  "status": {
+    "draft": "Draft",
+    "pending": "Pending review",
+    "published": "Published",
+    "sold": "Sold",
+    "archived": "Archived"
+  },
+  "seed": {
+    "sellerSection": "Seller",
+    "businessSection": "Listing",
+    "optional": "optional",
+    "create": "Create and publish",
+    "created": "Listing created and published!",
+    "addPhotos": "Add photos"
+  }
+}
