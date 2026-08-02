@@ -12,5 +12,10 @@ RUN npm run build
 # ---- Runtime : nginx statique ----
 FROM nginx:alpine
 COPY --from=build /app/dist /usr/share/nginx/html
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+# Modèle rendu par envsubst au démarrage (voir nginx.conf.template).
+COPY nginx.conf.template /etc/nginx/templates/default.conf.template
+# Origine de l'API, utilisée pour servir les aperçus de partage aux robots
+# sociaux. Valeur de repli pour que le conteneur démarre même si la variable
+# n'est pas fournie : à surcharger en production (variable Coolify "Runtime").
+ENV API_ORIGIN=http://localhost:3000
 EXPOSE 80

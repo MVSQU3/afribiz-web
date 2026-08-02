@@ -1,10 +1,40 @@
 <!doctype html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>mon-projet</title>
+    <meta name="theme-color" content="#132a13" />
+
+    <!--
+      Aperçu de partage par défaut (accueil, recherche, landing…).
+      Les fiches annonces ont un aperçu propre à chacune, rendu côté serveur par
+      l'API : les robots sociaux n'exécutent pas le JavaScript, c'est nginx qui
+      les aiguille (voir nginx.conf.template).
+    -->
+    <meta
+      name="description"
+      content="Annonces vérifiées de cession d'entreprise en Afrique de l'Ouest : chiffres réels, contact direct avec le vendeur, six pays."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="AfriBiz" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta
+      property="og:title"
+      content="AfriBiz — Trouvez le business à reprendre en Afrique"
+    />
+    <meta
+      property="og:description"
+      content="Annonces vérifiées de cession d'entreprise en Afrique de l'Ouest : chiffres réels, contact direct avec le vendeur, six pays."
+    />
+    <meta name="twitter:card" content="summary" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800&display=swap"
+    />
+    <title>Afri Biz — Trouvez le business à reprendre en Afrique</title>
   </head>
   <body>
     <div id="root"></div>

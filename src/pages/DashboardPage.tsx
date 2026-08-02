@@ -2,18 +2,24 @@ import { useCallback, useEffect, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { api } from '../lib/api';
-import { type Business, type BusinessStatus, formatPrice, primaryImage } from '../lib/types';
+import { type Business, type BusinessStatus, formatPrice } from '../lib/types';
+import { btnSmall, errorBox, overlineStrong, successBox } from '../styles/ui';
 
-type MyBusiness = Business & { messagesCount: number; moderationNote?: string | null };
+type MyBusiness = Business & {
+  messagesCount: number;
+  moderationNote?: string | null;
+  needsReview?: boolean;
+};
 
 const STATUS_ORDER: BusinessStatus[] = ['draft', 'pending', 'published', 'sold', 'archived'];
 
-const STATUS_COLORS: Record<BusinessStatus, { bg: string; fg: string }> = {
-  draft: { bg: 'var(--color-bg)', fg: 'var(--color-text-secondary)' },
-  pending: { bg: '#fef3c7', fg: '#b45309' },
-  published: { bg: '#ecfdf5', fg: 'var(--color-success)' },
-  sold: { bg: 'var(--color-primary-light)', fg: 'var(--color-primary)' },
-  archived: { bg: 'var(--color-bg)', fg: 'var(--color-text-secondary)' },
+/** Chaque statut a son traitement : plein accent, champ lime, ou simple filet. */
+const STATUS_STYLES: Record<BusinessStatus, React.CSSProperties> = {
+  draft: { border: '1px solid var(--color-divider)', color: 'var(--color-text)' },
+  pending: { background: 'var(--color-highlight)', color: 'var(--color-text)' },
+  published: { background: 'var(--color-accent)', color: 'var(--color-bg)' },
+  sold: { background: 'var(--color-text)', color: 'var(--color-highlight)' },
+  archived: { border: '1px solid var(--color-rule)', color: 'var(--color-neutral-700)' },
 };
 
 export function DashboardPage() {
@@ -41,121 +47,194 @@ export function DashboardPage() {
     await load();
   };
 
-  if (!businesses) return <p style={{ color: 'var(--color-text-secondary)' }}>{t('common.loading')}</p>;
+  if (!businesses) return <p style={{ color: 'var(--color-neutral-700)' }}>{t('common.loading')}</p>;
+
+  const totalViews = businesses.reduce((sum, b) => sum + b.viewsCount, 0);
+  const totalMessages = businesses.reduce((sum, b) => sum + b.messagesCount, 0);
 
   const grouped = STATUS_ORDER.map((status) => ({
     status,
     items: businesses.filter((b) => b.status === status),
   })).filter((g) => g.items.length > 0);
 
+  const kpi = (value: string | number, labelKey: string, last = false) => (
+    <div style={{ padding: '12px 14px', borderRight: last ? undefined : '1px solid var(--color-rule)' }}>
+      <p style={{ margin: 0, fontSize: 24, fontWeight: 800, letterSpacing: '-0.02em' }}>{value}</p>
+      <p
+        style={{
+          margin: 0,
+          fontSize: 9,
+          letterSpacing: '0.08em',
+          textTransform: 'uppercase',
+          color: 'var(--color-neutral-700)',
+        }}
+      >
+        {t(labelKey)}
+      </p>
+    </div>
+  );
+
   return (
-    <div style={{ maxWidth: 720, margin: '0 auto' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <h1 style={{ fontSize: 'var(--text-xl)' }}>{t('dashboard.title')}</h1>
-        <Link to="/sell">
-          <button className="btn-primary" style={{ padding: '10px 20px' }}>+ {t('home.sellCta')}</button>
+    <div style={{ margin: 'calc(var(--space-4) * -1)' }}>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'flex-end',
+          padding: 'var(--space-3) var(--space-4)',
+          borderBottom: '2px solid var(--color-divider)',
+        }}
+      >
+        <h1 style={{ fontSize: 'var(--text-xl)', margin: 0 }}>{t('dashboard.title')}</h1>
+        <Link to="/profile" style={{ fontSize: 'var(--text-xs)', fontWeight: 600, color: 'var(--color-accent-700)' }}>
+          {t('profile.title')}
         </Link>
       </div>
 
-      {justSubmitted && (
-        <div className="card" style={{ padding: 'var(--space-4)', background: '#ecfdf5', color: 'var(--color-success)', marginBottom: 'var(--space-4)' }}>
-          {t('dashboard.submittedNotice')}
-        </div>
-      )}
+      {/* Trois compteurs en grille à filets */}
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(3, 1fr)',
+          borderBottom: '2px solid var(--color-divider)',
+        }}
+      >
+        {kpi(businesses.length, 'dashboard.listings')}
+        {kpi(totalViews.toLocaleString(i18n.language), 'dashboard.views')}
+        {kpi(totalMessages, 'dashboard.messages', true)}
+      </div>
 
-      {businesses.length === 0 && (
-        <div className="card" style={{ padding: 'var(--space-6)', textAlign: 'center', marginBottom: 'var(--space-4)' }}>
-          <p style={{ color: 'var(--color-text-secondary)' }}>{t('dashboard.empty')}</p>
-          <Link to="/sell"><button className="btn-primary">{t('home.sellCta')}</button></Link>
-        </div>
-      )}
+      <div style={{ padding: 'var(--space-4)' }}>
+        {justSubmitted && <div style={successBox}>{t('dashboard.submittedNotice')}</div>}
+        {params.get('updated') === '1' && (
+          <div style={successBox}>{t('dashboard.updatedNotice')}</div>
+        )}
 
-      {grouped.map(({ status, items }) => (
-        <section key={status} style={{ marginBottom: 'var(--space-6)' }}>
-          <h2 style={{ fontSize: 'var(--text-lg)' }}>
-            {t(`status.${status}`)} ({items.length})
-          </h2>
-          <div style={{ display: 'grid', gap: 'var(--space-3)' }}>
-            {items.map((b) => {
-              const img = primaryImage(b);
-              const c = STATUS_COLORS[b.status];
-              return (
-                <div key={b.id} className="card" style={{ padding: 'var(--space-3)' }}>
-                  <div style={{ display: 'flex', gap: 'var(--space-3)' }}>
-                    <div
-                      style={{
-                        width: 80,
-                        height: 80,
-                        borderRadius: 'var(--radius-md)',
-                        flexShrink: 0,
-                        background: img ? `url(${img}) center/cover` : 'var(--color-primary-light)',
-                      }}
-                    />
-                    <div style={{ flex: 1, minWidth: 0 }}>
-                      <div style={{ display: 'flex', gap: 'var(--space-2)', alignItems: 'center', flexWrap: 'wrap' }}>
-                        <strong style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{b.title}</strong>
-                        <span className="badge" style={{ background: c.bg, color: c.fg }}>{t(`status.${b.status}`)}</span>
-                        {b.isPremium && <span className="badge badge-featured">{t('listing.featured')}</span>}
-                      </div>
-                      <p style={{ margin: '2px 0', fontSize: 'var(--text-sm)', color: 'var(--color-primary)', fontWeight: 600 }}>
-                        {formatPrice(b.askingPrice, b.country, i18n.language)}
-                      </p>
-                      <p style={{ margin: 0, fontSize: 'var(--text-sm)', color: 'var(--color-text-secondary)' }}>
-                        👁 {b.viewsCount} {t('dashboard.views')} · ✉ {b.messagesCount} {t('dashboard.messages')}
-                      </p>
-                    </div>
-                  </div>
+        {businesses.length === 0 && (
+          <div style={{ border: '2px solid var(--color-divider)', padding: 'var(--space-6)', textAlign: 'center' }}>
+            <p style={{ color: 'var(--color-neutral-700)', fontSize: 'var(--text-sm)' }}>{t('dashboard.empty')}</p>
+            <Link to="/sell" className="btn-primary" style={{ display: 'inline-block' }}>
+              {t('home.sellCta')}
+            </Link>
+          </div>
+        )}
 
-                  {b.status === 'draft' && b.moderationNote && (
-                    <div style={{ background: '#fef2f2', color: 'var(--color-danger)', borderRadius: 'var(--radius-md)', padding: 'var(--space-3)', fontSize: 'var(--text-sm)', marginTop: 'var(--space-3)' }}>
-                      <strong>{t('dashboard.rejectedReason')} :</strong> {b.moderationNote}
-                    </div>
-                  )}
+        {businesses.length > 0 && (
+          <Link
+            to="/sell"
+            className="btn-primary"
+            style={{ display: 'block', textAlign: 'left', marginBottom: 'var(--space-4)' }}
+          >
+            + {t('home.sellCta')}
+          </Link>
+        )}
 
-                  <div style={{ display: 'flex', gap: 'var(--space-2)', marginTop: 'var(--space-3)', flexWrap: 'wrap' }}>
-                    {(b.status === 'draft' || b.status === 'pending') && (
-                      <Link to={`/sell?id=${b.id}`}>
-                        <button style={actionBtn}>{t('dashboard.edit')}</button>
-                      </Link>
+        {grouped.map(({ status, items }) => (
+          <section key={status} style={{ marginBottom: 'var(--space-6)' }}>
+            <p style={{ ...overlineStrong, marginBottom: 0 }}>
+              {t(`status.${status}`)} ({items.length})
+            </p>
+            {items.map((b) => (
+              <div key={b.id} style={{ padding: 'var(--space-3) 0', borderTop: '1px solid var(--color-rule)' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', gap: 8, marginBottom: 5 }}>
+                  <p
+                    style={{
+                      margin: 0,
+                      fontSize: 'var(--text-sm)',
+                      fontWeight: 800,
+                      lineHeight: 1.15,
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
+                      whiteSpace: 'nowrap',
+                    }}
+                  >
+                    {b.title}
+                  </p>
+                  <span style={{ display: 'flex', gap: 4, flex: 'none' }}>
+                    {/* Une annonce modifiée reste en ligne : on le dit, sinon
+                        le vendeur croit sa correction bloquée. */}
+                    {b.needsReview && (
+                      <span
+                        className="badge"
+                        style={{ background: 'var(--color-highlight)', color: 'var(--color-text)', height: 18 }}
+                      >
+                        {t('dashboard.underReview')}
+                      </span>
                     )}
-                    {b.status === 'draft' && (
-                      <button style={{ ...actionBtn, background: 'var(--color-primary)', color: '#fff', border: 'none' }} onClick={() => void submit(b.id)}>
-                        {t('sell.submit')}
-                      </button>
-                    )}
-                    {b.status === 'published' && (
-                      <Link to={`/businesses/${b.id}`}>
-                        <button style={actionBtn}>{t('dashboard.view')}</button>
-                      </Link>
-                    )}
-                    {b.status !== 'archived' && b.status !== 'sold' && (
-                      <button style={{ ...actionBtn, color: 'var(--color-danger)', borderColor: 'var(--color-danger)' }} onClick={() => void archive(b.id)}>
-                        {t('dashboard.archive')}
-                      </button>
-                    )}
-                  </div>
+                    <span className="badge" style={{ ...STATUS_STYLES[b.status], height: 18 }}>
+                      {t(`status.${b.status}`)}
+                    </span>
+                  </span>
                 </div>
-              );
-            })}
+                <p style={{ margin: 0, fontSize: 'var(--text-xs)', fontWeight: 800, color: 'var(--color-accent-700)' }}>
+                  {formatPrice(b.askingPrice, b.country, i18n.language)}
+                </p>
+                <p style={{ margin: 0, fontSize: 'var(--text-xs)', color: 'var(--color-neutral-700)' }}>
+                  {b.viewsCount} {t('dashboard.views')} · {b.messagesCount} {t('dashboard.messages')}
+                </p>
+
+                {b.status === 'draft' && b.moderationNote && (
+                  <div style={{ ...errorBox, marginTop: 'var(--space-3)', marginBottom: 0 }}>
+                    <strong>{t('dashboard.rejectedReason')} :</strong> {b.moderationNote}
+                  </div>
+                )}
+
+                <div style={{ display: 'flex', gap: 6, marginTop: 9, flexWrap: 'wrap' }}>
+                  {(b.status === 'draft' || b.status === 'pending' || b.status === 'published') && (
+                    <Link to={`/sell?id=${b.id}`} style={btnSmall}>
+                      {t('dashboard.edit')}
+                    </Link>
+                  )}
+                  {b.status === 'draft' && (
+                    <button
+                      style={{
+                        ...btnSmall,
+                        background: 'var(--color-accent)',
+                        color: 'var(--color-bg)',
+                        borderColor: 'var(--color-accent)',
+                      }}
+                      onClick={() => void submit(b.id)}
+                    >
+                      {t('sell.submit')}
+                    </button>
+                  )}
+                  {b.status === 'published' && (
+                    <Link to={`/businesses/${b.id}`} style={btnSmall}>
+                      {t('dashboard.view')}
+                    </Link>
+                  )}
+                  {b.status !== 'archived' && b.status !== 'sold' && (
+                    <button
+                      style={{ ...btnSmall, color: 'var(--color-neutral-700)', borderColor: 'var(--color-rule)' }}
+                      onClick={() => void archive(b.id)}
+                    >
+                      {t('dashboard.archive')}
+                    </button>
+                  )}
+                </div>
+              </div>
+            ))}
+          </section>
+        ))}
+
+        <section style={{ borderTop: '2px solid var(--color-divider)', paddingTop: 'var(--space-3)' }}>
+          <p style={{ ...overlineStrong, marginBottom: 'var(--space-2)' }}>{t('dashboard.buyerSection')}</p>
+          <div style={{ display: 'flex', gap: 'var(--space-4)', flexWrap: 'wrap' }}>
+            <Link
+              to="/messages"
+              style={{ fontSize: 'var(--text-sm)', fontWeight: 600, color: 'var(--color-accent-700)' }}
+            >
+              {t('nav.messages')} →
+            </Link>
+            <Link
+              to="/favorites"
+              style={{ fontSize: 'var(--text-sm)', fontWeight: 600, color: 'var(--color-accent-700)' }}
+            >
+              {t('favorites.title')} →
+            </Link>
           </div>
         </section>
-      ))}
-
-      <section className="card" style={{ padding: 'var(--space-4)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <span>{t('dashboard.buyerSection')}</span>
-        <Link to="/messages" style={{ color: 'var(--color-primary)', fontWeight: 600, fontSize: 'var(--text-sm)' }}>
-          {t('nav.messages')} →
-        </Link>
-      </section>
+      </div>
     </div>
   );
 }
-
-const actionBtn: React.CSSProperties = {
-  border: '1px solid var(--color-border)',
-  background: 'var(--color-surface)',
-  borderRadius: 'var(--radius-full)',
-  padding: '6px 14px',
-  fontSize: 'var(--text-sm)',
-  fontWeight: 600,
-};

@@ -1,0 +1,73 @@
+# Modèle traité par envsubst au démarrage du conteneur nginx (image officielle :
+# tout fichier /etc/nginx/templates/*.template est rendu dans conf.d/).
+# Seules les variables réellement présentes dans l'environnement sont
+# substituées ; les variables nginx ($uri, $http_user_agent…) sont préservées.
+#
+# API_ORIGIN doit pointer vers l'API AfriBiz, sans barre finale ni chemin.
+# Ex. : API_ORIGIN=https://api.afribiz.africa
+
+# Robots des réseaux sociaux et moteurs de recherche : ils n'exécutent pas le
+# JavaScript, l'application React ne leur montrerait qu'une page vide. On les
+# aiguille vers l'API, qui rend les balises Open Graph côté serveur.
+map $http_user_agent $afribiz_is_crawler {
+  default 0;
+  "~*(facebookexternalhit|facebookcatalog|WhatsApp|Twitterbot|LinkedInBot|TelegramBot|Slackbot|Discordbot|Pinterest|redditbot|Applebot|SkypeUriPreview|vkShare|Googlebot|bingbot|DuckDuckBot|YandexBot|Embedly|Iframely)" 1;
+}
+
+server {
+  listen 80;
+  root /usr/share/nginx/html;
+  index index.html;
+
+  # Compression pour les connexions lentes
+  gzip on;
+  gzip_types text/css application/javascript application/json image/svg+xml;
+  gzip_min_length 1024;
+
+  # Cache long sur les assets fingerprintés
+  location /assets/ {
+    add_header Cache-Control "public, max-age=31536000, immutable";
+  }
+
+  # Fiche annonce : aiguillage robot / humain.
+  # `return 418` + location nommée plutôt qu'un `proxy_pass` dans un `if` —
+  # c'est la seule forme de branchement fiable dans nginx.
+  location ~ "^/businesses/[0-9a-fA-F-]+$" {
+    error_page 418 = @share_preview;
+    if ($afribiz_is_crawler) {
+      return 418;
+    }
+    try_files $uri /index.html;
+  }
+
+  location @share_preview {
+    # Le chemin est réécrit ici plutôt que collé dans proxy_pass : une variable
+    # dans proxy_pass forcerait nginx à résoudre le DNS à chaque requête et
+    # exigerait une directive `resolver`. Avec une URL littérale, la résolution
+    # a lieu une fois au démarrage.
+    rewrite ^ /og$uri break;
+    proxy_pass ${API_ORIGIN};
+
+    proxy_set_header Host $host;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+
+    # Un robot n'attend pas et ne réessaie pas : mieux vaut une réponse
+    # dégradée tout de suite qu'un aperçu vide au bout de trente secondes.
+    proxy_connect_timeout 3s;
+    proxy_read_timeout 5s;
+
+    # API injoignable : on sert l'application plutôt qu'une 502.
+    proxy_intercept_errors on;
+    error_page 500 502 503 504 = @spa;
+  }
+
+  location @spa {
+    try_files /index.html =404;
+  }
+
+  # SPA : toutes les autres routes renvoient index.html
+  location / {
+    try_files $uri $uri/ /index.html;
+  }
+}

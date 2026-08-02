@@ -1,11 +1,13 @@
 import { NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
+// Quatre onglets, sans icône : le design system porte la hiérarchie par le
+// contraste et les capitales, pas par des pictogrammes.
 const items = [
-  { to: '/', key: 'nav.home', icon: '🏠' },
-  { to: '/search', key: 'nav.search', icon: '🔍' },
-  { to: '/messages', key: 'nav.messages', icon: '✉️' },
-  { to: '/dashboard', key: 'nav.dashboard', icon: '👤' },
+  { to: '/', key: 'nav.home', end: true },
+  { to: '/search', key: 'nav.search', end: false },
+  { to: '/messages', key: 'nav.messages', end: false },
+  { to: '/dashboard', key: 'nav.account', end: false },
 ] as const;
 
 export function BottomNav() {
@@ -19,29 +21,31 @@ export function BottomNav() {
         left: 0,
         right: 0,
         height: 'var(--bottom-nav-height)',
-        background: 'var(--color-surface)',
-        boxShadow: 'var(--shadow-nav)',
+        background: 'var(--color-bg)',
+        borderTop: '2px solid var(--color-divider)',
         display: 'flex',
         zIndex: 10,
       }}
     >
-      {items.map((item) => (
+      {items.map((item, i) => (
         <NavLink
           key={item.to}
           to={item.to}
+          end={item.end}
           style={({ isActive }) => ({
             flex: 1,
             display: 'flex',
-            flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
-            gap: 2,
-            fontSize: 'var(--text-xs)',
-            fontWeight: isActive ? 700 : 400,
-            color: isActive ? 'var(--color-primary)' : 'var(--color-text-secondary)',
+            fontSize: '10px',
+            fontWeight: isActive ? 800 : 600,
+            letterSpacing: '0.08em',
+            textTransform: 'uppercase',
+            borderLeft: i === 0 ? 'none' : '1px solid var(--color-rule)',
+            background: isActive ? 'var(--color-text)' : 'transparent',
+            color: isActive ? 'var(--color-highlight)' : 'var(--color-neutral-700)',
           })}
         >
-          <span style={{ fontSize: 18 }}>{item.icon}</span>
           {t(item.key)}
         </NavLink>
       ))}

@@ -8,6 +8,8 @@
     "search": "Explore",
     "messages": "Messages",
     "dashboard": "Dashboard",
+    "account": "Account",
+    "admin": "Admin",
     "login": "Log in",
     "register": "Sign up",
     "logout": "Log out"
@@ -16,6 +18,7 @@
     "title": "Find your next business",
     "subtitle": "Hundreds of verified opportunities across West Africa",
     "searchPlaceholder": "City, sector or keyword...",
+    "searchCta": "Go",
     "featured": "Featured",
     "noListings": "No listings yet",
     "sellTitle": "Selling your business?",
@@ -34,7 +37,23 @@
     "all": "All",
     "minPrice": "Min price",
     "maxPrice": "Max price",
-    "noResults": "No results with these filters"
+    "noResults": "No results with these filters",
+    "createAlert": "Create an alert",
+    "alertCreated": "Alert created",
+    "tooManyAlerts": "You have reached the maximum of 10 alerts. Delete one to create another.",
+    "allListings": "All listings",
+    "sortBy": "Sort by",
+    "sort": {
+      "recent": "Most recent",
+      "price_asc": "Price, low to high",
+      "price_desc": "Price, high to low",
+      "yield": "Best multiple"
+    },
+    "city": "City",
+    "revenueRange": "Annual revenue",
+    "profitRange": "Annual net profit",
+    "min": "Min",
+    "max": "Max"
   },
   "listing": {
     "askingPrice": "Asking price",
@@ -50,13 +69,31 @@
     "reasonForSale": "Reason for sale",
     "soldBy": "Sold by",
     "notFound": "Listing not found",
-    "employeesShort": "employees"
+    "employeesShort": "employees",
+    "noPhoto": "No photo",
+    "margin": "Net margin",
+    "multiple": "Multiple",
+    "multipleShort": "{{multiple}} earnings",
+    "multipleHint": "Asking price relative to annual net profit",
+    "valuationExplained_one": "The asking price is {{multiple}} the annual net profit: at constant results, the investment is recovered in about {{count}} year.",
+    "valuationExplained_other": "The asking price is {{multiple}} the annual net profit: at constant results, the investment is recovered in about {{count}} years.",
+    "valuationUnderYear": "The asking price is {{multiple}} the annual net profit: at constant results, the investment is recovered in under a year.",
+    "valuationLoss": "This business is loss-making, so the earnings multiple does not apply. Valuation then rests on assets, customer base or location.",
+    "valuationUnavailable": "The earnings multiple cannot be computed from the declared figures.",
+    "share": "Share",
+    "linkCopied": "Link copied",
+    "copyManually": "Copy this link",
+    "report": "Report",
+    "reportHint": "Tell us what is wrong with this listing. Our team will review it again.",
+    "reportSubmit": "Send report",
+    "reportSent": "Report sent. Thank you — our team will review it."
   },
   "auth": {
     "login": "Log in",
     "register": "Create account",
     "email": "Email",
     "phone": "Phone",
+    "phoneHint": "International format required",
     "password": "Password",
     "otpSent": "Code sent by SMS",
     "otpVerify": "Verify code",
@@ -69,14 +106,31 @@
     "phoneTaken": "An account with this phone number already exists",
     "invalidPhone": "Invalid phone number (international format required, e.g. +2250701020304)",
     "noAccount": "No account yet?",
-    "hasAccount": "Already have an account?"
+    "hasAccount": "Already have an account?",
+    "forgotLink": "Forgot your password?",
+    "forgotTitle": "Forgot password",
+    "forgotIntro": "Enter the email or phone number of your account. If an account matches, you will receive a link to choose a new password.",
+    "forgotSubmit": "Send me the link",
+    "forgotSent": "If an account matches this identifier, a reset link has just been sent by email. It expires in one hour.",
+    "forgotSpam": "Remember to check your spam folder.",
+    "backToLogin": "Back to log in",
+    "resetTitle": "New password",
+    "resetSubmit": "Save password",
+    "resetDone": "Password changed. You can now log in.",
+    "resetInvalid": "This link is invalid or has expired. Please request a new one.",
+    "newPassword": "New password",
+    "confirmPassword": "Confirm password",
+    "passwordTooShort": "At least {{count}} characters",
+    "passwordMismatch": "The two passwords do not match"
   },
   "common": {
     "loading": "Loading...",
     "error": "Something went wrong",
     "retry": "Retry",
     "seeAll": "See all",
-    "back": "Back"
+    "back": "Back",
+    "close": "Close",
+    "tooManyRequests": "Too many attempts. Please wait a few minutes before trying again."
   },
   "countries": {
     "CI": "Ivory Coast",
@@ -90,7 +144,11 @@
     "title": "My profile",
     "language": "Language",
     "save": "Save",
-    "saved": "Profile updated"
+    "saved": "Profile updated",
+    "verified": "Verified account",
+    "unverified": "Unverified account",
+    "myListings": "My listings",
+    "open": "Open"
   },
   "images": {
     "addImages": "+ Add photos",
@@ -113,8 +171,8 @@
   },
   "sell": {
     "title": "Sell my business",
-    "step1": "Basic information",
-    "step2": "Financials",
+    "step1": "Basics",
+    "step2": "Figures",
     "step3": "Photos",
     "businessTitle": "Listing title",
     "description": "Description",
@@ -126,10 +184,13 @@
     "reasonForSale": "Reason for sale",
     "saveAndContinue": "Save and continue",
     "submit": "Submit for review",
-    "moderationNote": "Your listing will be reviewed by our team before going live."
+    "moderationNote": "Your listing will be reviewed by our team before going live.",
+    "saveChanges": "Save changes",
+    "editPublishedNotice": "This listing is live. Your corrections apply immediately: it stays visible, and our team reviews it afterwards."
   },
   "admin": {
     "title": "Administration",
+    "pendingCount": "{{count}} listings pending",
     "moderation": "Moderation",
     "reports": "Reports",
     "users": "Users",
@@ -154,6 +215,8 @@
   "messages": {
     "empty": "No conversations yet. Contact a seller from a listing.",
     "about": "About",
+    "interlocutor": "Conversation",
+    "view": "View",
     "startConversation": "Send your first message to the seller",
     "placeholder": "Your message...",
     "send": "Send"
@@ -162,20 +225,49 @@
     "title": "Dashboard",
     "empty": "You have no listings yet.",
     "submittedNotice": "Listing submitted! Our team will review it before publication.",
+    "listings": "Listings",
     "views": "views",
     "messages": "messages",
     "rejectedReason": "Rejection reason",
     "edit": "Edit",
     "view": "View listing",
     "archive": "Archive",
-    "buyerSection": "Your conversations with sellers"
+    "buyerSection": "Your conversations with sellers",
+    "updatedNotice": "Changes saved. Your listing stays live and will be reviewed again by our team.",
+    "underReview": "Under review"
   },
   "status": {
     "draft": "Draft",
-    "pending": "Pending review",
+    "pending": "Pending",
     "published": "Published",
     "sold": "Sold",
     "archived": "Archived"
+  },
+  "favorites": {
+    "title": "Saved & alerts",
+    "listings": "Saved listings",
+    "alerts": "My alerts",
+    "alertsHint": "An alert emails you as soon as a new listing matches your search. At most one email per day per alert.",
+    "empty": "No saved listing yet. Use the \"save\" button on a listing to find it here.",
+    "noAlerts": "No alert yet. Run a search then save it to be notified of new listings.",
+    "createFromSearch": "From a search →",
+    "add": "Save this listing",
+    "remove": "Remove from saved",
+    "save": "Save",
+    "saved": "Saved",
+    "active": "Active",
+    "paused": "Paused",
+    "pause": "Pause",
+    "resume": "Resume",
+    "delete": "Delete",
+    "viewResults": "View results"
+  },
+  "unsubscribe": {
+    "title": "Unsubscribe",
+    "done": "Done: you will no longer receive emails for this alert.",
+    "manageHint": "Your other alerts stay active. You can manage them from your account, under \"Saved & alerts\".",
+    "error": "This unsubscribe link is invalid. You can manage your alerts from your account.",
+    "backToSearch": "Browse listings"
   },
   "seed": {
     "sellerSection": "Seller",
@@ -184,5 +276,143 @@
     "create": "Create and publish",
     "created": "Listing created and published!",
     "addPhotos": "Add photos"
+  },
+  "landing": {
+    "contactEmail": "contact@afribiz.africa",
+    "nav": {
+      "how": "How it works",
+      "countries": "Countries",
+      "pricing": "Pricing",
+      "faq": "FAQ"
+    },
+    "hero": {
+      "kicker": "Business acquisition marketplace · West Africa",
+      "title": "Find businesses to acquire in Africa",
+      "subtitle": "Verified listings, real figures, direct contact with the seller. Six countries, every sector — from the corner shop to the digital agency.",
+      "cta": "Explore"
+    },
+    "seller": {
+      "kicker": "Selling?",
+      "title": "Post your listing for free",
+      "body": "Three steps, a few minutes. Our team checks every file before it goes live — buyers know it, and they reply.",
+      "cta": "Sell my business",
+      "note": "No commission on publication."
+    },
+    "stats": {
+      "listings": {
+        "label": "Published listings",
+        "note": "UPDATED AT LAUNCH"
+      },
+      "countries": {
+        "label": "Countries covered",
+        "note": "CI · SN · BJ · TG · NG · GH"
+      },
+      "sellers": {
+        "label": "Verified sellers",
+        "note": "UPDATED AT LAUNCH"
+      },
+      "buyers": {
+        "label": "Registered buyers",
+        "note": "UPDATED AT LAUNCH"
+      }
+    },
+    "how": {
+      "title": "How it works",
+      "step1": {
+        "title": "Explore and filter",
+        "body": "Country, sector, business type, price range. Every listing shows annual revenue, net profit, headcount and founding year."
+      },
+      "step2": {
+        "title": "Contact the seller",
+        "body": "Built-in messaging, attached to the listing. Ask for the accounts, ask your questions, arrange the visit — no middleman."
+      },
+      "step3": {
+        "title": "Take over the business",
+        "body": "You negotiate directly. We verify sellers and remove any listing reported for misleading information."
+      }
+    },
+    "trust": {
+      "kicker": "Trust",
+      "listings": {
+        "title": "Verified listings",
+        "body": "A team checks the declared figures and documents before anything goes live."
+      },
+      "moderation": {
+        "title": "Moderation before publication",
+        "body": "No listing appears automatically. A rejection always comes with a reason for the seller."
+      },
+      "sellers": {
+        "title": "Verified sellers",
+        "body": "Identity and phone number confirmed. The \"verified\" badge is not self-declared."
+      }
+    },
+    "countries": {
+      "title": "Countries covered",
+      "subtitle": "Six markets at launch. Tell us where you are looking — we open country by country.",
+      "explore": "Explore"
+    },
+    "pricing": {
+      "title": "Pricing",
+      "subtitle": "Posting is free and will stay free. Paid options are still being calibrated — amounts will be announced before they go live.",
+      "free": "Free",
+      "tbd": "AMOUNT TO BE DEFINED",
+      "standard": {
+        "name": "Standard listing",
+        "body": "Full listing, key figures, up to 8 photos, messaging with buyers, dashboard and view statistics.",
+        "cta": "Post a listing"
+      },
+      "featured": {
+        "name": "Featured",
+        "body": "Top position in results, \"featured\" badge on the listing and the home page, priority in buyer alerts.",
+        "cta": "Notify me"
+      },
+      "support": {
+        "name": "Advisory",
+        "body": "Preparation of the sale file, presentation of the figures, price framing and qualified introductions to buyers.",
+        "cta": "Contact us"
+      }
+    },
+    "faq": {
+      "title": "Frequently asked questions",
+      "contact": "A question that is not here? Write to",
+      "free": {
+        "q": "Is posting a listing paid?",
+        "a": "No. The standard listing is free and complete: key figures, photos, messaging and dashboard. Featured options are optional."
+      },
+      "verify": {
+        "q": "How do you verify listings?",
+        "a": "Every file goes through moderation before publication: consistency of revenue, profit and asking price, seller identity, photos genuinely related to the business. A rejection always comes with a reason."
+      },
+      "commission": {
+        "q": "Do you take a commission on the sale?",
+        "a": "No commission on the transaction. You negotiate and close directly with the seller or the buyer."
+      },
+      "currency": {
+        "q": "Which currencies are prices shown in?",
+        "a": "In the currency of the listing's country: CFA franc (XOF) for Ivory Coast, Senegal, Benin and Togo, naira (NGN) for Nigeria, cedi (GHS) for Ghana."
+      },
+      "account": {
+        "q": "Can I contact a seller without an account?",
+        "a": "No. Messaging requires an account — that is what protects sellers from unserious enquiries."
+      },
+      "delay": {
+        "q": "How long before my listing is published?",
+        "a": "Moderation handles complete files within 48 working hours. An incomplete file is sent back to you with the list of missing items."
+      }
+    },
+    "cta": {
+      "title": "Create your account in a minute",
+      "body": "An account gives you access to messaging, listing tracking and view statistics.",
+      "note": "Free, no commitment."
+    },
+    "footer": {
+      "about": "Find the business to take over in Africa. Verified listings, direct contact, six countries.",
+      "buy": "Buy",
+      "sell": "Sell",
+      "explore": "Explore listings",
+      "contact": "Contact",
+      "openApp": "Open the app",
+      "legal": "© {{year}} AfriBiz. Abidjan · Dakar · Lomé."
+    }
   }
 }

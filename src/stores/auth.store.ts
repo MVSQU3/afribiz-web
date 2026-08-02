@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { api } from '../lib/api';
+import { useFavoritesStore } from './favorites.store';
 
 export interface User {
   id: string;
@@ -48,6 +49,8 @@ export const useAuthStore = create<AuthState>((set) => ({
       localStorage.setItem('accessToken', data.accessToken);
       localStorage.setItem('refreshToken', data.refreshToken);
       set({ user: data.user, isLoading: false });
+      // Les favoris appartiennent au compte : on les charge dès la connexion.
+      void useFavoritesStore.getState().load();
     } catch (err) {
       set({ isLoading: false });
       throw err;
@@ -70,6 +73,8 @@ export const useAuthStore = create<AuthState>((set) => ({
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
     set({ user: null });
+    // Sinon les favoris du compte précédent resteraient affichés.
+    useFavoritesStore.getState().clear();
   },
 
   fetchMe: async () => {

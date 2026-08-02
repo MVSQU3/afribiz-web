@@ -1,9 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { api } from '../lib/api';
-import { type Business } from '../lib/types';
+import { formatPrice, primaryImage, type Business } from '../lib/types';
 import { useAuthStore } from '../stores/auth.store';
+import { avatar, initials, thumb } from '../styles/ui';
 
 interface Message {
   id: string;
@@ -17,7 +18,8 @@ interface Message {
 
 export function ConversationPage() {
   const { businessId, interlocutorId } = useParams();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
   const { user } = useAuthStore();
   const [messages, setMessages] = useState<Message[]>([]);
   const [business, setBusiness] = useState<Business | null>(null);
@@ -27,13 +29,18 @@ export function ConversationPage() {
   const bottomRef = useRef<HTMLDivElement>(null);
 
   const load = useCallback(async () => {
-    const { data } = await api.get<Message[]>(`/messages/conversations/${businessId}/${interlocutorId}`);
+    const { data } = await api.get<Message[]>(
+      `/messages/conversations/${businessId}/${interlocutorId}`,
+    );
     setMessages(data);
   }, [businessId, interlocutorId]);
 
   useEffect(() => {
     void load();
-    void api.get<Business>(`/businesses/${businessId}`).then(({ data }) => setBusiness(data)).catch(() => {});
+    void api
+      .get<Business>(`/businesses/${businessId}`)
+      .then(({ data }) => setBusiness(data))
+      .catch(() => {});
     const timer = setInterval(() => void load(), 15000); // Polling
     return () => clearInterval(timer);
   }, [load, businessId]);
@@ -62,23 +69,111 @@ export function ConversationPage() {
     }
   };
 
+  // Le nom de l'interlocuteur n'est pas exposé par l'API du fil : on le déduit
+  // du vendeur quand c'est lui, sinon on reste sur un libellé neutre.
+  const isSeller = business?.seller?.id === interlocutorId;
+  const interlocutorName = isSeller ? business?.seller?.firstName : undefined;
+
   return (
-    <div style={{ maxWidth: 640, margin: '0 auto', display: 'flex', flexDirection: 'column', minHeight: 'calc(100vh - var(--header-height) - var(--bottom-nav-height) - 32px)' }}>
-      {/* Contexte du listing en en-tête */}
+    <div style={{ margin: 'calc(var(--space-4) * -1)', paddingBottom: 72 }}>
+      {/* En-tête du fil */}
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: 10,
+          padding: '10px var(--space-4)',
+          borderBottom: '2px solid var(--color-divider)',
+        }}
+      >
+        <button
+          onClick={() => navigate('/messages')}
+          style={{ border: 0, background: 'transparent', fontSize: 'var(--text-sm)', fontWeight: 800, padding: 0 }}
+          aria-label={t('common.back')}
+        >
+          ←
+        </button>
+        <div style={avatar(30)}>{initials(interlocutorName ?? '?')}</div>
+        <div style={{ minWidth: 0 }}>
+          <p style={{ margin: 0, fontSize: 'var(--text-sm)', fontWeight: 800, lineHeight: 1.1 }}>
+            {interlocutorName ?? t('messages.interlocutor')}
+          </p>
+          <p
+            style={{
+              margin: 0,
+              fontSize: 10,
+              letterSpacing: '0.06em',
+              textTransform: 'uppercase',
+              color: 'var(--color-accent)',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              whiteSpace: 'nowrap',
+            }}
+          >
+            {t('messages.about')} · {business?.title ?? '…'}
+          </p>
+        </div>
+      </div>
+
+      {/* Rappel de l'annonce */}
       {business && (
         <Link
           to={`/businesses/${business.id}`}
-          className="card"
-          style={{ padding: 'var(--space-3)', marginBottom: 'var(--space-3)', display: 'flex', alignItems: 'center', gap: 'var(--space-3)' }}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 10,
+            padding: '10px var(--space-4)',
+            borderBottom: '2px solid var(--color-divider)',
+            background: 'var(--color-surface)',
+          }}
         >
-          <span style={{ fontSize: 'var(--text-sm)', color: 'var(--color-text-secondary)' }}>{t('messages.about')}</span>
-          <strong style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{business.title}</strong>
+          <div style={thumb(primaryImage(business), 52, 40)} />
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <p
+              style={{
+                margin: 0,
+                fontSize: 'var(--text-xs)',
+                fontWeight: 800,
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                whiteSpace: 'nowrap',
+              }}
+            >
+              {business.title}
+            </p>
+            <p style={{ margin: 0, fontSize: 'var(--text-xs)', fontWeight: 800, color: 'var(--color-accent-700)' }}>
+              {formatPrice(business.askingPrice, business.country, i18n.language)}
+            </p>
+          </div>
+          <span
+            style={{
+              fontSize: 10,
+              fontWeight: 800,
+              letterSpacing: '0.06em',
+              textTransform: 'uppercase',
+              color: 'var(--color-accent-700)',
+            }}
+          >
+            {t('messages.view')}
+          </span>
         </Link>
       )}
 
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
+      {/* Fil : reçus en surface encadrée, envoyés en pavé sombre */}
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 10,
+          padding: 'var(--space-4)',
+          minHeight: '40vh',
+        }}
+      >
         {messages.length === 0 && (
-          <p style={{ color: 'var(--color-text-secondary)', textAlign: 'center' }}>{t('messages.startConversation')}</p>
+          <p style={{ color: 'var(--color-neutral-700)', fontSize: 'var(--text-sm)', textAlign: 'center' }}>
+            {t('messages.startConversation')}
+          </p>
         )}
         {messages.map((m) => {
           const mine = m.senderId === user?.id;
@@ -86,18 +181,24 @@ export function ConversationPage() {
             <div
               key={m.id}
               style={{
+                maxWidth: '78%',
                 alignSelf: mine ? 'flex-end' : 'flex-start',
-                maxWidth: '80%',
-                background: mine ? 'var(--color-primary)' : 'var(--color-surface)',
-                color: mine ? '#fff' : 'inherit',
-                borderRadius: 'var(--radius-lg)',
-                padding: 'var(--space-2) var(--space-3)',
-                boxShadow: 'var(--shadow-card)',
+                padding: '10px 12px',
+                fontSize: 'var(--text-sm)',
+                lineHeight: 1.45,
+                background: mine ? 'var(--color-text)' : 'var(--color-surface)',
+                color: mine ? 'var(--color-bg)' : 'var(--color-text)',
+                border: mine ? '1px solid var(--color-text)' : '1px solid var(--color-rule)',
               }}
             >
               <p style={{ margin: 0, whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>{m.content}</p>
               <p style={{ margin: 0, fontSize: 10, opacity: 0.7, textAlign: 'right' }}>
-                {new Date(m.createdAt).toLocaleString(undefined, { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' })}
+                {new Date(m.createdAt).toLocaleString(i18n.language, {
+                  day: '2-digit',
+                  month: '2-digit',
+                  hour: '2-digit',
+                  minute: '2-digit',
+                })}
               </p>
             </div>
           );
@@ -105,22 +206,57 @@ export function ConversationPage() {
         <div ref={bottomRef} />
       </div>
 
-      {error && <p style={{ color: 'var(--color-danger)', fontSize: 'var(--text-sm)' }}>{error}</p>}
-      <form onSubmit={(e) => void send(e)} style={{ display: 'flex', gap: 'var(--space-2)', position: 'sticky', bottom: 'calc(var(--bottom-nav-height) + var(--space-2))', zIndex: 5, background: 'var(--color-bg)', padding: 'var(--space-2) 0', marginTop: 'var(--space-2)' }}>
+      {error && (
+        <p style={{ color: 'var(--color-danger)', fontSize: 'var(--text-sm)', padding: '0 var(--space-4)' }}>
+          {error}
+        </p>
+      )}
+
+      {/* Zone de saisie fixe */}
+      <form
+        onSubmit={(e) => void send(e)}
+        style={{
+          position: 'fixed',
+          bottom: 'var(--bottom-nav-height)',
+          left: 0,
+          right: 0,
+          zIndex: 5,
+          display: 'flex',
+          gap: 8,
+          padding: '10px var(--space-4)',
+          background: 'var(--color-bg)',
+          borderTop: '2px solid var(--color-divider)',
+        }}
+      >
         <input
           value={draft}
           onChange={(e) => setDraft(e.target.value)}
           placeholder={t('messages.placeholder')}
           style={{
             flex: 1,
-            padding: 'var(--space-3) var(--space-4)',
-            borderRadius: 'var(--radius-full)',
-            border: '1px solid var(--color-border)',
-            fontSize: 'var(--text-base)',
+            minWidth: 0,
+            padding: '11px 12px',
+            fontFamily: 'inherit',
+            fontSize: 'var(--text-sm)',
             background: 'var(--color-surface)',
+            border: '2px solid var(--color-divider)',
+            borderRadius: 0,
           }}
         />
-        <button className="btn-primary" disabled={sending || !draft.trim()}>
+        <button
+          disabled={sending || !draft.trim()}
+          style={{
+            padding: '11px 14px',
+            fontSize: 'var(--text-xs)',
+            fontWeight: 800,
+            letterSpacing: '0.08em',
+            textTransform: 'uppercase',
+            background: 'var(--color-accent)',
+            color: 'var(--color-bg)',
+            border: '2px solid var(--color-accent)',
+            opacity: sending || !draft.trim() ? 0.45 : 1,
+          }}
+        >
           {t('messages.send')}
         </button>
       </form>

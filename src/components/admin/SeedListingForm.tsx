@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { api } from '../../lib/api';
 import { BUSINESS_TYPES, COUNTRIES, SECTORS } from '../../lib/types';
 import { field, label, errorBox, submitBtn } from '../auth/AuthForm.css';
+import { successBox } from '../../styles/ui';
 
 const EMPTY = {
   seller: { firstName: '', lastName: '', phone: '', email: '', country: 'CI' },
@@ -57,14 +58,14 @@ export function SeedListingForm() {
   };
 
   return (
-    <form onSubmit={(e) => void onSubmit(e)} className="card" style={{ padding: 'var(--space-6)' }}>
+    <form onSubmit={(e) => void onSubmit(e)}>
       {error && <div style={errorBox}>{error}</div>}
       {created && (
-        <div style={{ ...errorBox, background: '#ecfdf5', color: 'var(--color-success)' }}>
+        <div style={successBox}>
           {t('seed.created')}{' '}
-          <Link to={`/sell?id=${created}`} style={{ fontWeight: 700 }}>{t('seed.addPhotos')}</Link>
+          <Link to={`/sell?id=${created}`} style={{ fontWeight: 800 }}>{t('seed.addPhotos')}</Link>
           {' · '}
-          <Link to={`/businesses/${created}`} style={{ fontWeight: 700 }}>{t('dashboard.view')}</Link>
+          <Link to={`/businesses/${created}`} style={{ fontWeight: 800 }}>{t('dashboard.view')}</Link>
         </div>
       )}
 

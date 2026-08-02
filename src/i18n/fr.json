@@ -8,6 +8,8 @@
     "search": "Explorer",
     "messages": "Messages",
     "dashboard": "Tableau de bord",
+    "account": "Compte",
+    "admin": "Admin",
     "login": "Connexion",
     "register": "Inscription",
     "logout": "Déconnexion"
@@ -16,6 +18,7 @@
     "title": "Trouvez votre prochain business",
     "subtitle": "Des centaines d'opportunités vérifiées en Afrique de l'Ouest",
     "searchPlaceholder": "Ville, secteur ou mot-clé...",
+    "searchCta": "Ok",
     "featured": "Mis en avant",
     "noListings": "Aucune annonce pour le moment",
     "sellTitle": "Vous vendez votre business ?",
@@ -27,14 +30,30 @@
     "filters": "Filtres",
     "country": "Pays",
     "sector": "Secteur",
+    "city": "Ville",
     "priceRange": "Fourchette de prix",
+    "revenueRange": "Chiffre d'affaires annuel",
+    "profitRange": "Bénéfice net annuel",
+    "min": "Min",
+    "max": "Max",
     "businessType": "Type de business",
     "apply": "Appliquer",
     "reset": "Réinitialiser",
     "all": "Tous",
     "minPrice": "Prix min",
     "maxPrice": "Prix max",
-    "noResults": "Aucun résultat avec ces filtres"
+    "noResults": "Aucun résultat avec ces filtres",
+    "createAlert": "Créer une alerte",
+    "alertCreated": "Alerte créée",
+    "tooManyAlerts": "Vous avez atteint le maximum de 10 alertes. Supprimez-en une pour en créer une nouvelle.",
+    "allListings": "Toutes les annonces",
+    "sortBy": "Trier par",
+    "sort": {
+      "recent": "Plus récentes",
+      "price_asc": "Prix croissant",
+      "price_desc": "Prix décroissant",
+      "yield": "Meilleur multiple"
+    }
   },
   "listing": {
     "askingPrice": "Prix demandé",
@@ -50,13 +69,31 @@
     "reasonForSale": "Raison de la vente",
     "soldBy": "Vendu par",
     "notFound": "Annonce introuvable",
-    "employeesShort": "employés"
+    "employeesShort": "employés",
+    "noPhoto": "Aucune photo",
+    "margin": "Marge nette",
+    "multiple": "Multiple",
+    "multipleShort": "{{multiple}} le bénéfice",
+    "multipleHint": "Prix demandé rapporté au bénéfice net annuel",
+    "valuationExplained_one": "Le prix demandé représente {{multiple}} le bénéfice net annuel : à résultat constant, l'investissement est récupéré en environ {{count}} an.",
+    "valuationExplained_other": "Le prix demandé représente {{multiple}} le bénéfice net annuel : à résultat constant, l'investissement est récupéré en environ {{count}} ans.",
+    "valuationUnderYear": "Le prix demandé représente {{multiple}} le bénéfice net annuel : à résultat constant, l'investissement est récupéré en moins d'un an.",
+    "valuationLoss": "Cette activité est déficitaire : le multiple de rentabilité ne s'applique pas. L'évaluation repose alors sur les actifs, la clientèle ou l'emplacement.",
+    "valuationUnavailable": "Le multiple de rentabilité n'est pas calculable à partir des chiffres déclarés.",
+    "share": "Partager",
+    "linkCopied": "Lien copié",
+    "copyManually": "Copiez ce lien",
+    "report": "Signaler",
+    "reportHint": "Décrivez ce qui pose problème dans cette annonce. Notre équipe la réexaminera.",
+    "reportSubmit": "Envoyer le signalement",
+    "reportSent": "Signalement transmis. Merci — notre équipe va l'examiner."
   },
   "auth": {
     "login": "Connexion",
     "register": "Créer un compte",
     "email": "Email",
     "phone": "Téléphone",
+    "phoneHint": "Format international requis",
     "password": "Mot de passe",
     "otpSent": "Code envoyé par SMS",
     "otpVerify": "Vérifier le code",
@@ -69,14 +106,31 @@
     "phoneTaken": "Un compte existe déjà avec ce numéro",
     "invalidPhone": "Numéro invalide (format international requis, ex : +2250701020304)",
     "noAccount": "Pas encore de compte ?",
-    "hasAccount": "Déjà un compte ?"
+    "hasAccount": "Déjà un compte ?",
+    "forgotLink": "Mot de passe oublié ?",
+    "forgotTitle": "Mot de passe oublié",
+    "forgotIntro": "Indiquez l'email ou le téléphone de votre compte. Si un compte correspond, vous recevrez un lien pour choisir un nouveau mot de passe.",
+    "forgotSubmit": "Recevoir le lien",
+    "forgotSent": "Si un compte correspond à cet identifiant, un lien de réinitialisation vient d'être envoyé par email. Il expire dans une heure.",
+    "forgotSpam": "Pensez à regarder vos courriers indésirables.",
+    "backToLogin": "Retour à la connexion",
+    "resetTitle": "Nouveau mot de passe",
+    "resetSubmit": "Enregistrer le mot de passe",
+    "resetDone": "Mot de passe modifié. Vous pouvez maintenant vous connecter.",
+    "resetInvalid": "Ce lien est invalide ou a expiré. Demandez-en un nouveau.",
+    "newPassword": "Nouveau mot de passe",
+    "confirmPassword": "Confirmer le mot de passe",
+    "passwordTooShort": "Au moins {{count}} caractères",
+    "passwordMismatch": "Les deux mots de passe ne correspondent pas"
   },
   "common": {
     "loading": "Chargement...",
     "error": "Une erreur est survenue",
     "retry": "Réessayer",
     "seeAll": "Voir tout",
-    "back": "Retour"
+    "back": "Retour",
+    "close": "Fermer",
+    "tooManyRequests": "Trop de tentatives. Patientez quelques minutes avant de réessayer."
   },
   "countries": {
     "CI": "Côte d'Ivoire",
@@ -90,7 +144,11 @@
     "title": "Mon profil",
     "language": "Langue",
     "save": "Enregistrer",
-    "saved": "Profil mis à jour"
+    "saved": "Profil mis à jour",
+    "verified": "Compte vérifié",
+    "unverified": "Compte non vérifié",
+    "myListings": "Mes annonces",
+    "open": "Ouvrir"
   },
   "images": {
     "addImages": "+ Ajouter des photos",
@@ -113,8 +171,8 @@
   },
   "sell": {
     "title": "Mettre en vente mon business",
-    "step1": "Informations de base",
-    "step2": "Chiffres financiers",
+    "step1": "Base",
+    "step2": "Chiffres",
     "step3": "Photos",
     "businessTitle": "Titre de l'annonce",
     "description": "Description",
@@ -126,10 +184,13 @@
     "reasonForSale": "Raison de la vente",
     "saveAndContinue": "Enregistrer et continuer",
     "submit": "Soumettre pour validation",
+    "saveChanges": "Enregistrer les modifications",
+    "editPublishedNotice": "Cette annonce est en ligne. Vos corrections s'appliquent immédiatement : elle reste visible, et notre équipe la revérifie ensuite.",
     "moderationNote": "Votre annonce sera vérifiée par notre équipe avant publication."
   },
   "admin": {
     "title": "Administration",
+    "pendingCount": "{{count}} annonces en attente",
     "moderation": "Modération",
     "reports": "Signalements",
     "users": "Utilisateurs",
@@ -154,6 +215,8 @@
   "messages": {
     "empty": "Aucune conversation pour le moment. Contactez un vendeur depuis une annonce.",
     "about": "À propos de",
+    "interlocutor": "Conversation",
+    "view": "Voir",
     "startConversation": "Envoyez votre premier message au vendeur",
     "placeholder": "Votre message...",
     "send": "Envoyer"
@@ -162,6 +225,9 @@
     "title": "Tableau de bord",
     "empty": "Vous n'avez pas encore d'annonce.",
     "submittedNotice": "Annonce soumise ! Elle sera vérifiée par notre équipe avant publication.",
+    "updatedNotice": "Modifications enregistrées. Votre annonce reste en ligne et sera revérifiée par notre équipe.",
+    "underReview": "Revérification",
+    "listings": "Annonces",
     "views": "vues",
     "messages": "messages",
     "rejectedReason": "Motif du rejet",
@@ -172,10 +238,36 @@
   },
   "status": {
     "draft": "Brouillon",
-    "pending": "En attente de validation",
+    "pending": "En attente",
     "published": "Publiée",
     "sold": "Vendue",
     "archived": "Archivée"
+  },
+  "favorites": {
+    "title": "Favoris et alertes",
+    "listings": "Annonces gardées",
+    "alerts": "Mes alertes",
+    "alertsHint": "Une alerte vous prévient par email dès qu'une nouvelle annonce correspond à votre recherche. Au plus un email par jour et par alerte.",
+    "empty": "Aucune annonce gardée. Utilisez le bouton « garder » sur une annonce pour la retrouver ici.",
+    "noAlerts": "Aucune alerte. Lancez une recherche puis enregistrez-la pour être prévenu des nouveautés.",
+    "createFromSearch": "Depuis une recherche →",
+    "add": "Garder cette annonce",
+    "remove": "Retirer des favoris",
+    "save": "Garder",
+    "saved": "Gardée",
+    "active": "Active",
+    "paused": "En pause",
+    "pause": "Mettre en pause",
+    "resume": "Réactiver",
+    "delete": "Supprimer",
+    "viewResults": "Voir les résultats"
+  },
+  "unsubscribe": {
+    "title": "Désinscription",
+    "done": "C'est fait : vous ne recevrez plus d'email pour cette alerte.",
+    "manageHint": "Vos autres alertes restent actives. Vous pouvez les gérer depuis votre espace, rubrique « Favoris et alertes ».",
+    "error": "Ce lien de désinscription est invalide. Vous pouvez gérer vos alertes depuis votre compte.",
+    "backToSearch": "Voir les annonces"
   },
   "seed": {
     "sellerSection": "Vendeur",
@@ -184,5 +276,131 @@
     "create": "Créer et publier",
     "created": "Annonce créée et publiée !",
     "addPhotos": "Ajouter des photos"
+  },
+  "landing": {
+    "contactEmail": "contact@afribiz.africa",
+    "nav": {
+      "how": "Comment ça marche",
+      "countries": "Pays",
+      "pricing": "Tarifs",
+      "faq": "FAQ"
+    },
+    "hero": {
+      "kicker": "Marketplace de reprise d'entreprise · Afrique de l'Ouest",
+      "title": "Trouvez des business à reprendre en Afrique",
+      "subtitle": "Annonces vérifiées, chiffres réels, contact direct avec le vendeur. Six pays, tous les secteurs — du commerce de quartier à l'agence digitale.",
+      "cta": "Explorer"
+    },
+    "seller": {
+      "kicker": "Vous vendez ?",
+      "title": "Publiez votre annonce gratuitement",
+      "body": "Trois étapes, quelques minutes. Notre équipe vérifie chaque dossier avant publication — les acheteurs le savent, et ils répondent.",
+      "cta": "Mettre en vente mon business",
+      "note": "Aucune commission à la publication."
+    },
+    "stats": {
+      "listings": { "label": "Annonces publiées", "note": "MISE À JOUR AU LANCEMENT" },
+      "countries": { "label": "Pays couverts", "note": "CI · SN · BJ · TG · NG · GH" },
+      "sellers": { "label": "Vendeurs vérifiés", "note": "MISE À JOUR AU LANCEMENT" },
+      "buyers": { "label": "Repreneurs inscrits", "note": "MISE À JOUR AU LANCEMENT" }
+    },
+    "how": {
+      "title": "Comment ça marche",
+      "step1": {
+        "title": "Explorez et filtrez",
+        "body": "Pays, secteur, type de business, fourchette de prix. Chaque annonce affiche CA annuel, bénéfice net, effectif et année de création."
+      },
+      "step2": {
+        "title": "Contactez le vendeur",
+        "body": "Messagerie intégrée, rattachée à l'annonce. Demandez les bilans, posez vos questions, organisez la visite — sans intermédiaire."
+      },
+      "step3": {
+        "title": "Reprenez le business",
+        "body": "Vous négociez directement. Nous vérifions les vendeurs et retirons toute annonce signalée pour information trompeuse."
+      }
+    },
+    "trust": {
+      "kicker": "Confiance",
+      "listings": {
+        "title": "Annonces vérifiées",
+        "body": "Une équipe contrôle les chiffres et les documents déclarés avant toute mise en ligne."
+      },
+      "moderation": {
+        "title": "Modération avant publication",
+        "body": "Aucune annonce ne paraît automatiquement. Un refus est toujours motivé auprès du vendeur."
+      },
+      "sellers": {
+        "title": "Vendeurs vérifiés",
+        "body": "Identité et numéro confirmés. Le badge « vérifié » n'est pas déclaratif."
+      }
+    },
+    "countries": {
+      "title": "Pays couverts",
+      "subtitle": "Six marchés au lancement. Dites-nous où vous cherchez — nous ouvrons pays par pays.",
+      "explore": "Explorer"
+    },
+    "pricing": {
+      "title": "Tarifs",
+      "subtitle": "Publier est et restera gratuit. Les options payantes sont en cours de calibrage — les montants seront annoncés avant activation.",
+      "free": "Gratuit",
+      "tbd": "MONTANT À DÉFINIR",
+      "standard": {
+        "name": "Annonce standard",
+        "body": "Annonce complète, chiffres clés, jusqu'à 8 photos, messagerie avec les acheteurs, tableau de bord et statistiques de vues.",
+        "cta": "Publier une annonce"
+      },
+      "featured": {
+        "name": "Mise en avant",
+        "body": "Position haute dans les résultats, badge « mis en avant » sur la fiche et en page d'accueil, priorité dans les alertes acheteurs.",
+        "cta": "Être prévenu"
+      },
+      "support": {
+        "name": "Accompagnement",
+        "body": "Préparation du dossier de cession, mise en forme des chiffres, cadrage du prix et mise en relation qualifiée avec les repreneurs.",
+        "cta": "Nous contacter"
+      }
+    },
+    "faq": {
+      "title": "Questions fréquentes",
+      "contact": "Une question qui n'est pas là ? Écrivez à",
+      "free": {
+        "q": "Publier une annonce est-il payant ?",
+        "a": "Non. L'annonce standard est gratuite et complète : chiffres clés, photos, messagerie et tableau de bord. Les options de mise en avant sont facultatives."
+      },
+      "verify": {
+        "q": "Comment vérifiez-vous les annonces ?",
+        "a": "Chaque dossier passe en modération avant publication : cohérence du chiffre d'affaires, du bénéfice et du prix demandé, identité du vendeur, photos réellement liées au business. Un refus est toujours motivé."
+      },
+      "commission": {
+        "q": "Prenez-vous une commission sur la vente ?",
+        "a": "Aucune commission sur la transaction. Vous négociez et concluez directement avec le vendeur ou l'acheteur."
+      },
+      "currency": {
+        "q": "Dans quelles devises sont affichés les prix ?",
+        "a": "Dans la devise du pays de l'annonce : franc CFA (XOF) pour la Côte d'Ivoire, le Sénégal, le Bénin et le Togo, naira (NGN) pour le Nigeria, cedi (GHS) pour le Ghana."
+      },
+      "account": {
+        "q": "Puis-je contacter un vendeur sans compte ?",
+        "a": "Non. La messagerie exige un compte — c'est ce qui protège les vendeurs des demandes non sérieuses."
+      },
+      "delay": {
+        "q": "Combien de temps avant la publication de mon annonce ?",
+        "a": "La modération traite les dossiers complets sous 48 heures ouvrées. Un dossier incomplet vous est renvoyé avec la liste des éléments manquants."
+      }
+    },
+    "cta": {
+      "title": "Créez votre compte en une minute",
+      "body": "Un compte vous donne accès à la messagerie, au suivi de vos annonces et aux statistiques de vues.",
+      "note": "Gratuit, sans engagement."
+    },
+    "footer": {
+      "about": "Trouvez le business à reprendre en Afrique. Annonces vérifiées, contact direct, six pays.",
+      "buy": "Acheter",
+      "sell": "Vendre",
+      "explore": "Explorer les annonces",
+      "contact": "Contact",
+      "openApp": "Ouvrir l'application",
+      "legal": "© {{year}} AfriBiz. Abidjan · Dakar · Lomé."
+    }
   }
 }

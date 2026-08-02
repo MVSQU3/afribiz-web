@@ -1,41 +1,16 @@
-// Styles partagés des formulaires auth (objet JS pour rester en single-file par composant)
+// Styles partagés des formulaires auth.
+// Les primitives ont été centralisées dans src/styles/ui.ts lors du passage au
+// design system moderniste ; ce module reste le point d'import des pages de
+// formulaire (auth, vente, profil, admin).
 import type { CSSProperties } from 'react';
+import { btnPrimary, errorBox, field, label } from '../../styles/ui';
 
-export const field: CSSProperties = {
-  width: '100%',
-  padding: '12px 16px',
-  borderRadius: 'var(--radius-md)',
-  border: '1px solid var(--color-border)',
-  fontSize: 'var(--text-base)',
-  background: 'var(--color-surface)',
-  marginBottom: 'var(--space-3)',
-  boxSizing: 'border-box',
-};
+export { field, label, errorBox };
 
-export const label: CSSProperties = {
-  display: 'block',
-  fontSize: 'var(--text-sm)',
-  fontWeight: 600,
-  marginBottom: 'var(--space-1)',
-};
-
-export const errorBox: CSSProperties = {
-  background: '#fef2f2',
-  color: 'var(--color-danger)',
-  borderRadius: 'var(--radius-md)',
-  padding: 'var(--space-3)',
-  fontSize: 'var(--text-sm)',
-  marginBottom: 'var(--space-3)',
-};
-
+/** Bouton de soumission pleine largeur d'un formulaire. */
 export const submitBtn: CSSProperties = {
+  ...btnPrimary,
   width: '100%',
-  background: 'var(--color-primary)',
-  color: '#fff',
-  border: 'none',
-  borderRadius: 'var(--radius-full)',
   padding: '14px',
-  fontSize: 'var(--text-base)',
-  fontWeight: 600,
   marginTop: 'var(--space-2)',
 };

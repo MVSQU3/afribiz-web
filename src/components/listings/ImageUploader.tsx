@@ -121,14 +121,18 @@ export function ImageUploader({ businessId, images, onChange }: Props) {
         <p style={{ color: 'var(--color-danger)', fontSize: 'var(--text-sm)' }}>{error}</p>
       )}
       <label
-        className="card"
         style={{
           display: 'block',
           padding: 'var(--space-6)',
           textAlign: 'center',
-          border: '2px dashed var(--color-border)',
+          background: 'var(--color-surface)',
+          border: '2px dashed var(--color-divider)',
           cursor: 'pointer',
           marginBottom: 'var(--space-4)',
+          fontSize: 'var(--text-xs)',
+          fontWeight: 800,
+          letterSpacing: '0.08em',
+          textTransform: 'uppercase',
         }}
       >
         <input
@@ -144,17 +148,25 @@ export function ImageUploader({ businessId, images, onChange }: Props) {
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))', gap: 'var(--space-3)' }}>
         {items.map((img, i) => (
-          <div key={img.id} className="card" style={{ overflow: 'hidden' }}>
+          <div key={img.id} style={{ border: '2px solid var(--color-divider)' }}>
             <img
               src={img.url.replace('/upload/', '/upload/w_300,h_200,c_fill,f_auto/')}
               alt="" loading="lazy"
+              className="grayscale"
               style={{ width: '100%', height: 90, objectFit: 'cover', display: 'block' }}
             />
-            <div style={{ display: 'flex', justifyContent: 'space-between', padding: 'var(--space-1)' }}>
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                padding: 2,
+                borderTop: '1px solid var(--color-rule)',
+              }}
+            >
               <button onClick={() => void move(i, -1)} disabled={i === 0} style={btn}>←</button>
               <button
                 onClick={() => void setPrimary(img.id)}
-                style={{ ...btn, color: img.isPrimary ? 'var(--color-primary)' : undefined }}
+                style={{ ...btn, color: img.isPrimary ? 'var(--color-accent)' : undefined }}
                 title={t('images.setPrimary')}
               >
                 {img.isPrimary ? '★' : '☆'}
