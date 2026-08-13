@@ -40,6 +40,27 @@ const sectionTitle: CSSProperties = {
   lineHeight: 1,
 };
 
+/** CTA posé sur le champ accent (bloc d'inscription) : le lime, plein. */
+const lpCtaOnAccent: CSSProperties = {
+  display: 'inline-block',
+  padding: '13px clamp(14px, 2.4vw, 22px)',
+  fontSize: 13,
+  fontWeight: 800,
+  letterSpacing: '0.08em',
+  textTransform: 'uppercase',
+  background: 'var(--color-highlight)',
+  color: 'var(--color-text)',
+  border: '2px solid var(--color-highlight)',
+};
+
+/** Même gabarit, contour seul — lisible sur l'accent sans lui voler l'œil. */
+const lpCtaOnAccentGhost: CSSProperties = {
+  ...lpCtaOnAccent,
+  background: 'transparent',
+  color: 'var(--color-bg)',
+  border: '2px solid var(--color-accent-2-200)',
+};
+
 const kicker: CSSProperties = {
   fontSize: 12,
   fontWeight: 600,
@@ -71,10 +92,11 @@ export function LandingPage() {
         .lp-faq { display: grid; grid-template-columns: 1fr 1.6fr; }
         .lp-faq > div:first-child { border-right: 2px solid var(--color-divider); }
         .lp-news { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: end; }
+        .lp-directory { display: grid; grid-template-columns: 1.6fr 1fr; gap: 32px; align-items: center; }
         .lp-footer-cols { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 40px; }
         .lp-nav-links { display: flex; gap: 28px; }
         @media (max-width: 900px) {
-          .lp-hero, .lp-faq, .lp-news, .lp-3 { grid-template-columns: 1fr; }
+          .lp-hero, .lp-faq, .lp-news, .lp-3, .lp-directory { grid-template-columns: 1fr; }
           .lp-hero > aside { border-left: 0; border-top: 2px solid var(--color-divider); }
           .lp-faq > div:first-child { border-right: 0; border-bottom: 2px solid var(--color-divider); }
           .lp-4, .lp-6 { grid-template-columns: repeat(2, 1fr); }
@@ -112,6 +134,7 @@ export function LandingPage() {
         >
           <a href="#comment" style={{ color: 'var(--color-accent-700)' }}>{t('landing.nav.how')}</a>
           <a href="#pays" style={{ color: 'var(--color-accent-700)' }}>{t('landing.nav.countries')}</a>
+          <a href="#annuaire" style={{ color: 'var(--color-accent-700)' }}>{t('landing.nav.directory')}</a>
           <a href="#tarifs" style={{ color: 'var(--color-accent-700)' }}>{t('landing.nav.pricing')}</a>
           <a href="#faq" style={{ color: 'var(--color-accent-700)' }}>{t('landing.nav.faq')}</a>
         </nav>
@@ -546,7 +569,6 @@ export function LandingPage() {
 
       {/* --------------------------- Appel à l'inscription ------------------- */}
       <section
-        className="lp-news"
         style={{
           borderBottom: '2px solid var(--color-divider)',
           background: 'var(--color-accent)',
@@ -554,34 +576,70 @@ export function LandingPage() {
           padding: 'clamp(32px, 5vw, 56px) clamp(16px, 4vw, 48px)',
         }}
       >
-        <div>
-          <h2 style={{ margin: '0 0 10px', fontSize: 'clamp(28px, 4.5vw, 44px)', letterSpacing: '-0.035em', lineHeight: 1.02 }}>
-            {t('landing.cta.title')}
-          </h2>
-          <p style={{ margin: 0, fontSize: 15, lineHeight: 1.5, color: 'var(--color-accent-2-200)', maxWidth: '52ch' }}>
-            {t('landing.cta.body')}
-          </p>
+        {/* La grille reste sur un conteneur interne : le bandeau annuaire qui
+            suit doit occuper toute la largeur, pas une cellule de la grille. */}
+        <div className="lp-news">
+          <div>
+            <h2 style={{ margin: '0 0 10px', fontSize: 'clamp(28px, 4.5vw, 44px)', letterSpacing: '-0.035em', lineHeight: 1.02 }}>
+              {t('landing.cta.title')}
+            </h2>
+            <p style={{ margin: 0, fontSize: 15, lineHeight: 1.5, color: 'var(--color-accent-2-200)', maxWidth: '52ch' }}>
+              {t('landing.cta.body')}
+            </p>
+          </div>
+          <div>
+            <Link
+              to="/register"
+              style={{
+                display: 'block',
+                padding: '18px 24px',
+                fontSize: 14,
+                fontWeight: 800,
+                letterSpacing: '0.08em',
+                textTransform: 'uppercase',
+                background: 'var(--color-highlight)',
+                color: 'var(--color-text)',
+                textAlign: 'center',
+              }}
+            >
+              {t('auth.register')}
+            </Link>
+            <p style={{ fontSize: 12, color: 'var(--color-accent-2-200)', margin: '10px 0 0' }}>
+              {t('landing.cta.note')}
+            </p>
+          </div>
         </div>
-        <div>
-          <Link
-            to="/register"
-            style={{
-              display: 'block',
-              padding: '18px 24px',
-              fontSize: 14,
-              fontWeight: 800,
-              letterSpacing: '0.08em',
-              textTransform: 'uppercase',
-              background: 'var(--color-highlight)',
-              color: 'var(--color-text)',
-              textAlign: 'center',
-            }}
-          >
-            {t('auth.register')}
-          </Link>
-          <p style={{ fontSize: 12, color: 'var(--color-accent-2-200)', margin: '10px 0 0' }}>
-            {t('landing.cta.note')}
-          </p>
+
+        {/* Annuaire — dernière chose avant le pied. Volontairement en retrait :
+            c'est du contenu éditorial, il ne doit pas concurrencer l'inscription. */}
+        <div
+          id="annuaire"
+          className="lp-directory"
+          style={{
+            marginTop: 'clamp(28px, 4vw, 44px)',
+            paddingTop: 'clamp(24px, 3vw, 32px)',
+            borderTop: '1px solid var(--color-accent-2-200)',
+          }}
+        >
+          <div>
+            <p style={{ ...kicker, color: 'var(--color-accent-2)', margin: '0 0 8px' }}>
+              {t('landing.directory.kicker')}
+            </p>
+            <h3 style={{ margin: '0 0 8px', fontSize: 'clamp(20px, 2.6vw, 26px)', letterSpacing: '-0.02em', lineHeight: 1.1 }}>
+              {t('landing.directory.title')}
+            </h3>
+            <p style={{ margin: 0, fontSize: 14, lineHeight: 1.5, color: 'var(--color-accent-2-200)', maxWidth: '60ch' }}>
+              {t('landing.directory.subtitle')}
+            </p>
+          </div>
+          <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', alignItems: 'flex-start' }}>
+            <Link to="/directory" style={lpCtaOnAccent}>
+              {t('landing.directory.cta')}
+            </Link>
+            <Link to="/directory#proposer" style={lpCtaOnAccentGhost}>
+              {t('landing.directory.submitCta')}
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -612,6 +670,8 @@ export function LandingPage() {
               <Link to="/search">{t('search.sector')}</Link>
               <br />
               <a href="#pays">{t('landing.nav.countries')}</a>
+              <br />
+              <Link to="/directory">{t('directory.title')}</Link>
             </p>
           </div>
           <div>

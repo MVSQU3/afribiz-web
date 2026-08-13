@@ -23,6 +23,7 @@ const ForgotPasswordPage = lazy(() => import('./pages/ForgotPasswordPage').then(
 const ResetPasswordPage = lazy(() => import('./pages/ResetPasswordPage').then((m) => ({ default: m.ResetPasswordPage })));
 const FavoritesPage = lazy(() => import('./pages/FavoritesPage').then((m) => ({ default: m.FavoritesPage })));
 const UnsubscribeAlertPage = lazy(() => import('./pages/UnsubscribeAlertPage').then((m) => ({ default: m.UnsubscribeAlertPage })));
+const DirectoryPage = lazy(() => import('./pages/DirectoryPage').then((m) => ({ default: m.DirectoryPage })));
 
 function Fallback() {
   return <p style={{ color: 'var(--color-text-secondary)', textAlign: 'center', padding: 32 }}>…</p>;
@@ -46,6 +47,8 @@ export default function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/search" element={<SearchPage />} />
             <Route path="/businesses/:id" element={<ListingDetailPage />} />
+            {/* Annuaire éditorial : entreprises non cédées, distinct de /search */}
+            <Route path="/directory" element={<DirectoryPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/forgot-password" element={<ForgotPasswordPage />} />

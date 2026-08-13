@@ -1,6 +1,6 @@
 {
   "app": {
-    "name": "AfriBiz",
+    "name": "Afriqueexit",
     "tagline": "Find your next business in Africa"
   },
   "nav": {
@@ -24,6 +24,50 @@
     "sellTitle": "Selling your business?",
     "sellSubtitle": "Post your listing for free in minutes",
     "sellCta": "Sell my business"
+  },
+  "directory": {
+    "title": "African SaaS directory",
+    "subtitle": "The software we track across the continent, curated by hand.",
+    "metaTitle": "African SaaS directory — Afriqueexit",
+    "metaDescription": "A selection of software operating in Africa: fintech, logistics, health, agritech and more. An informational directory — these companies are not necessarily for sale.",
+    "notForSale": "This directory is informational. The companies listed here are not necessarily for sale and we make no introductions — for businesses to acquire, see the listings.",
+    "filterCountry": "Country",
+    "filterCategory": "Category",
+    "all": "All",
+    "count": "{{count}} product listed",
+    "count_other": "{{count}} products listed",
+    "empty": "No product matches these filters.",
+    "visit": "Visit site",
+    "verified": "Verified",
+    "submit": {
+      "title": "Submit a product",
+      "subtitle": "Do you build an African SaaS, or know one that is missing here? Send it over.",
+      "fieldName": "Product name",
+      "fieldUrl": "Website",
+      "fieldCountry": "Country",
+      "fieldCity": "City (optional)",
+      "fieldCategory": "Category",
+      "fieldDescriptionFr": "In one sentence, in French",
+      "fieldDescriptionEn": "The same sentence, in English",
+      "fieldEmail": "Your email (optional)",
+      "countryPlaceholder": "Two-letter code, e.g. CI",
+      "categoryPlaceholder": "Pick a category",
+      "cta": "Send submission",
+      "sent": "Thank you — your submission is recorded. It will be reviewed before appearing in the directory, which usually takes a few days.",
+      "alreadyListed": "This website is already listed or awaiting review.",
+      "hint": "We review every submission before publishing; listing is free and comes with no strings attached. Your email is only used to get back to you if anything is unclear, and is never shown."
+    },
+    "disclaimer": "Information is sourced from official websites and public sources. Spotted an error, an omission, or want to be removed? Get in touch.",
+    "categories": {
+      "fintech": "Fintech",
+      "logistics": "Logistics",
+      "health": "Health",
+      "agritech": "Agritech",
+      "edtech": "Education",
+      "hr": "HR",
+      "commerce": "Commerce",
+      "devtools": "Developer tools"
+    }
   },
   "search": {
     "results": "{{count}} businesses found",
@@ -210,7 +254,24 @@
     "suspended": "Suspended",
     "suspend": "Suspend",
     "unsuspend": "Reactivate",
-    "seed": "Seed"
+    "seed": "Seed",
+    "directory": {
+      "tab": "Directory",
+      "empty": "No entry with this status",
+      "status": {
+        "pending": "Pending",
+        "published": "Published",
+        "rejected": "Rejected"
+      },
+      "slug": "Address",
+      "submittedBy": "submitted by",
+      "note": "Reason",
+      "publish": "Publish",
+      "rejectReason": "Rejection reason (kept internal)",
+      "confirmReject": "Confirm rejection",
+      "delete": "Delete",
+      "confirmDelete": "Permanently delete \"{{name}}\"? This cannot be undone."
+    }
   },
   "messages": {
     "empty": "No conversations yet. Contact a seller from a listing.",
@@ -278,12 +339,20 @@
     "addPhotos": "Add photos"
   },
   "landing": {
-    "contactEmail": "contact@afribiz.africa",
+    "contactEmail": "contact@afriqueexit.africa",
     "nav": {
       "how": "How it works",
       "countries": "Countries",
+      "directory": "Directory",
       "pricing": "Pricing",
       "faq": "FAQ"
+    },
+    "directory": {
+      "kicker": "Also here",
+      "title": "The African SaaS directory",
+      "subtitle": "We track the software being built across the continent and list it here. This directory is informational: these companies are not necessarily for sale and are not part of the listings.",
+      "cta": "Browse the directory",
+      "submitCta": "Submit a product"
     },
     "hero": {
       "kicker": "Business acquisition marketplace · West Africa",
@@ -412,7 +481,7 @@
       "explore": "Explore listings",
       "contact": "Contact",
       "openApp": "Open the app",
-      "legal": "© {{year}} AfriBiz. Abidjan · Dakar · Lomé."
+      "legal": "© {{year}} Afriqueexit. Abidjan · Dakar · Lomé."
     }
   }
 }

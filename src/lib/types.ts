@@ -40,6 +40,84 @@ export interface SearchResult {
   pages: number;
 }
 
+
+/** Catégories de l'annuaire — miroir de `DirectoryCategory` côté API. */
+export const DIRECTORY_CATEGORIES = [
+  'fintech',
+  'logistics',
+  'health',
+  'agritech',
+  'edtech',
+  'hr',
+  'commerce',
+  'devtools',
+] as const;
+
+export type DirectoryCategory = (typeof DIRECTORY_CATEGORIES)[number];
+
+/**
+ * Entrée de l'annuaire, telle que l'API la renvoie **au public**.
+ *
+ * Les champs de modération (`status`, `submitterEmail`, `moderationNote`,
+ * `position`) n'y figurent pas : le service les exclut de sa sélection. Les
+ * déclarer ici laisserait croire qu'on peut s'en servir, et un `entry.status`
+ * vaudrait `undefined` à l'exécution sans que TypeScript proteste.
+ */
+export interface Directory {
+  id: string;
+  slug: string;
+  name: string;
+  website: string;
+  descriptionFr: string;
+  descriptionEn: string;
+  category: DirectoryCategory;
+  subcategory: string | null;
+  country: string;
+  city: string | null;
+  foundedYear: number | null;
+  isVerified: boolean;
+  publishedAt: string | null;
+}
+
+export type DirectoryStatus = 'pending' | 'published' | 'rejected';
+
+/**
+ * Entrée telle que la renvoient les routes `/directory/admin`.
+ *
+ * Elle porte les champs de modération que la liste publique n'expose pas —
+ * d'où un type distinct plutôt qu'un `Directory` aux champs optionnels : sur
+ * l'écran d'administration ils sont toujours là, et les rendre facultatifs
+ * obligerait à les tester partout.
+ */
+export interface DirectoryAdmin extends Directory {
+  status: DirectoryStatus;
+  submitterEmail: string | null;
+  moderationNote: string | null;
+  position: number;
+  createdAt: string;
+}
+
+export interface DirectoryResult {
+  items: Directory[];
+  total: number;
+  page: number;
+  limit: number;
+  pages: number;
+}
+
+/** Corps de POST /directory/submissions. */
+export interface DirectorySubmission {
+  name: string;
+  website: string;
+  descriptionFr: string;
+  descriptionEn: string;
+  category: DirectoryCategory | '';
+  country: string;
+  city?: string;
+  foundedYear?: number;
+  submitterEmail?: string;
+}
+
 const CURRENCIES: Record<string, string> = {
   CI: 'XOF', SN: 'XOF', BJ: 'XOF', TG: 'XOF', NG: 'NGN', GH: 'GHS',
 };

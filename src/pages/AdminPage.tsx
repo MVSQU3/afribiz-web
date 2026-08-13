@@ -7,6 +7,7 @@ import { useAuthStore } from '../stores/auth.store';
 import { field, errorBox } from '../components/auth/AuthForm.css';
 import { btnSmall, overline } from '../styles/ui';
 import { SeedListingForm } from '../components/admin/SeedListingForm';
+import { DirectorySubmissions } from '../components/admin/DirectorySubmissions';
 
 interface Report {
   id: string;
@@ -26,11 +27,12 @@ interface AdminUser {
   isSuspended: boolean;
 }
 
-type Tab = 'moderation' | 'reports' | 'users' | 'seed';
+type Tab = 'moderation' | 'reports' | 'directory' | 'users' | 'seed';
 
 const TABS: { key: Tab; labelKey: string }[] = [
   { key: 'moderation', labelKey: 'admin.moderation' },
   { key: 'reports', labelKey: 'admin.reports' },
+  { key: 'directory', labelKey: 'admin.directory.tab' },
   { key: 'users', labelKey: 'admin.users' },
   { key: 'seed', labelKey: 'admin.seed' },
 ];
@@ -219,6 +221,8 @@ export function AdminPage() {
             ))}
           </>
         )}
+
+        {tab === 'directory' && <DirectorySubmissions />}
 
         {tab === 'reports' && (
           <>

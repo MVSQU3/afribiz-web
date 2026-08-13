@@ -1,6 +1,6 @@
 {
   "app": {
-    "name": "AfriBiz",
+    "name": "Afriqueexit",
     "tagline": "Trouvez le business à reprendre en Afrique"
   },
   "nav": {
@@ -24,6 +24,50 @@
     "sellTitle": "Vous vendez votre business ?",
     "sellSubtitle": "Publiez votre annonce gratuitement en quelques minutes",
     "sellCta": "Mettre en vente"
+  },
+  "directory": {
+    "title": "Annuaire SaaS africain",
+    "subtitle": "Les logiciels que nous suivons sur le continent, mis à jour à la main.",
+    "metaTitle": "Annuaire des SaaS africains — Afriqueexit",
+    "metaDescription": "Une sélection de logiciels en service en Afrique : fintech, logistique, santé, agritech et plus. Annuaire informatif, ces entreprises ne sont pas forcément en vente.",
+    "notForSale": "Cet annuaire est informatif. Les entreprises listées ici ne sont pas forcément en vente et ne font l'objet d'aucune mise en relation — pour les business à reprendre, voir les annonces.",
+    "filterCountry": "Pays",
+    "filterCategory": "Catégorie",
+    "all": "Tous",
+    "count": "{{count}} logiciel référencé",
+    "count_other": "{{count}} logiciels référencés",
+    "empty": "Aucun logiciel ne correspond à ces filtres.",
+    "visit": "Voir le site",
+    "verified": "Vérifié",
+    "submit": {
+      "title": "Proposer un logiciel",
+      "subtitle": "Vous éditez un SaaS africain, ou vous en connaissez un qui manque ici ? Envoyez-le-nous.",
+      "fieldName": "Nom du logiciel",
+      "fieldUrl": "Site web",
+      "fieldCountry": "Pays",
+      "fieldCity": "Ville (facultatif)",
+      "fieldCategory": "Catégorie",
+      "fieldDescriptionFr": "En une phrase, en français",
+      "fieldDescriptionEn": "La même phrase, en anglais",
+      "fieldEmail": "Votre email (facultatif)",
+      "countryPlaceholder": "Code à deux lettres, ex : CI",
+      "categoryPlaceholder": "Choisir une catégorie",
+      "cta": "Envoyer la proposition",
+      "sent": "Merci — votre proposition est enregistrée. Elle sera relue avant d'apparaître dans l'annuaire, ce qui prend en général quelques jours.",
+      "alreadyListed": "Ce site figure déjà dans l'annuaire ou attend d'être relu.",
+      "hint": "Nous vérifions chaque proposition avant publication ; l'inscription est gratuite et sans contrepartie. Votre email ne sert qu'à vous recontacter en cas de doute, il n'est jamais affiché."
+    },
+    "disclaimer": "Les informations proviennent des sites officiels et de sources publiques. Une erreur, un oubli, ou vous souhaitez ne plus figurer ici ? Écrivez-nous.",
+    "categories": {
+      "fintech": "Fintech",
+      "logistics": "Logistique",
+      "health": "Santé",
+      "agritech": "Agritech",
+      "edtech": "Éducation",
+      "hr": "RH",
+      "commerce": "Commerce",
+      "devtools": "Outils développeurs"
+    }
   },
   "search": {
     "results": "{{count}} business trouvés",
@@ -210,7 +254,24 @@
     "suspended": "Suspendu",
     "suspend": "Suspendre",
     "unsuspend": "Réactiver",
-    "seed": "Seed"
+    "seed": "Seed",
+    "directory": {
+      "tab": "Annuaire",
+      "empty": "Aucune entrée avec ce statut",
+      "status": {
+        "pending": "En attente",
+        "published": "Publiées",
+        "rejected": "Rejetées"
+      },
+      "slug": "Adresse",
+      "submittedBy": "proposé par",
+      "note": "Motif",
+      "publish": "Publier",
+      "rejectReason": "Motif du rejet (conservé en interne)",
+      "confirmReject": "Confirmer le rejet",
+      "delete": "Supprimer",
+      "confirmDelete": "Supprimer définitivement « {{name}} » ? Cette action est irréversible."
+    }
   },
   "messages": {
     "empty": "Aucune conversation pour le moment. Contactez un vendeur depuis une annonce.",
@@ -278,12 +339,20 @@
     "addPhotos": "Ajouter des photos"
   },
   "landing": {
-    "contactEmail": "contact@afribiz.africa",
+    "contactEmail": "contact@afriqueexit.africa",
     "nav": {
       "how": "Comment ça marche",
       "countries": "Pays",
+      "directory": "Annuaire",
       "pricing": "Tarifs",
       "faq": "FAQ"
+    },
+    "directory": {
+      "kicker": "Aussi chez nous",
+      "title": "L'annuaire des SaaS africains",
+      "subtitle": "Nous suivons les logiciels qui se construisent sur le continent et nous les recensons ici. Cet annuaire est informatif : ces entreprises ne sont pas forcément en vente et ne figurent pas parmi les annonces.",
+      "cta": "Consulter l'annuaire",
+      "submitCta": "Proposer un logiciel"
     },
     "hero": {
       "kicker": "Marketplace de reprise d'entreprise · Afrique de l'Ouest",
@@ -299,10 +368,22 @@
       "note": "Aucune commission à la publication."
     },
     "stats": {
-      "listings": { "label": "Annonces publiées", "note": "MISE À JOUR AU LANCEMENT" },
-      "countries": { "label": "Pays couverts", "note": "CI · SN · BJ · TG · NG · GH" },
-      "sellers": { "label": "Vendeurs vérifiés", "note": "MISE À JOUR AU LANCEMENT" },
-      "buyers": { "label": "Repreneurs inscrits", "note": "MISE À JOUR AU LANCEMENT" }
+      "listings": {
+        "label": "Annonces publiées",
+        "note": "MISE À JOUR AU LANCEMENT"
+      },
+      "countries": {
+        "label": "Pays couverts",
+        "note": "CI · SN · BJ · TG · NG · GH"
+      },
+      "sellers": {
+        "label": "Vendeurs vérifiés",
+        "note": "MISE À JOUR AU LANCEMENT"
+      },
+      "buyers": {
+        "label": "Repreneurs inscrits",
+        "note": "MISE À JOUR AU LANCEMENT"
+      }
     },
     "how": {
       "title": "Comment ça marche",
@@ -400,7 +481,7 @@
       "explore": "Explorer les annonces",
       "contact": "Contact",
       "openApp": "Ouvrir l'application",
-      "legal": "© {{year}} AfriBiz. Abidjan · Dakar · Lomé."
+      "legal": "© {{year}} Afriqueexit. Abidjan · Dakar · Lomé."
     }
   }
 }
